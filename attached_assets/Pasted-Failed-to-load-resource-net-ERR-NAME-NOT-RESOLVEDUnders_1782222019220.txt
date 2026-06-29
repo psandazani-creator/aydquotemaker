@@ -1,0 +1,496 @@
+Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at index-e570eeb6.js:20025:37
+    at index-e570eeb6.js:20036:15
+    at new Promise (<anonymous>)
+    at KV (index-e570eeb6.js:20022:16)
+    at eU._refreshAccessToken (index-e570eeb6.js:22867:30)
+    at eU._callRefreshToken (index-e570eeb6.js:22954:58)
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+index-e570eeb6.js:22930 AuthRetryableFetchError: Failed to fetch
+    at cM (index-e570eeb6.js:20216:37)
+    at async zt (index-e570eeb6.js:20201:93)
+    at async index-e570eeb6.js:22867:131
+    at async index-e570eeb6.js:20025:31
+_recoverAndRefresh @ index-e570eeb6.js:22930Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at index-e570eeb6.js:20025:37
+    at index-e570eeb6.js:20036:15
+    at new Promise (<anonymous>)
+    at KV (index-e570eeb6.js:20022:16)
+    at eU._refreshAccessToken (index-e570eeb6.js:22867:30)
+    at eU._callRefreshToken (index-e570eeb6.js:22954:58)
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+2index-e570eeb6.js:22707 AuthRetryableFetchError: Failed to fetch
+    at cM (index-e570eeb6.js:20216:37)
+    at async zt (index-e570eeb6.js:20201:93)
+    at async index-e570eeb6.js:22867:131
+    at async index-e570eeb6.js:20025:31
+(anonymous) @ index-e570eeb6.js:22707Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at index-e570eeb6.js:20025:37
+    at index-e570eeb6.js:20036:15
+    at new Promise (<anonymous>)
+    at KV (index-e570eeb6.js:20022:16)
+    at eU._refreshAccessToken (index-e570eeb6.js:22867:30)
+    at eU._callRefreshToken (index-e570eeb6.js:22954:58)
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token:1  Failed to load resource: net::ERR_NAME_NOT_RESOLVEDUnderstand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216Understand this error
+workbox-7e5eb42b.js:61 workbox Router is responding to: /
+workbox-7e5eb42b.js:61 workbox Router is responding to: /assets/index-b3a13619.css
+workbox-7e5eb42b.js:61 workbox Router is responding to: /manifest.webmanifest
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867Understand this error
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025Understand this error
+index-e570eeb6.js:22707 AuthRetryableFetchError: Failed to fetch
+    at cM (index-e570eeb6.js:20216:37)
+    at async zt (index-e570eeb6.js:20201:93)
+    at async index-e570eeb6.js:22867:131
+    at async index-e570eeb6.js:20025:31
+(anonymous) @ index-e570eeb6.js:22707
+await in (anonymous)
+_useSession @ index-e570eeb6.js:22346Understand this error
+index-e570eeb6.js:15454 ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+kF @ index-e570eeb6.js:15454
+nf @ index-e570eeb6.js:15456
+TF @ index-e570eeb6.js:15458
+(anonymous) @ index-e570eeb6.js:15707
+_u @ index-e570eeb6.js:12110
+BI @ index-e570eeb6.js:12934
+UI @ index-e570eeb6.js:12903
+MI @ index-e570eeb6.js:12894
+VI @ index-e570eeb6.js:12889
+E6 @ index-e570eeb6.js:13620
+Sc @ index-e570eeb6.js:13600
+(anonymous) @ index-e570eeb6.js:13570
+re @ index-e570eeb6.js:1835
+le @ index-e570eeb6.js:1824
+St @ index-e570eeb6.js:1962
+postMessage
+Dt @ index-e570eeb6.js:1974
+St @ index-e570eeb6.js:1964
+postMessage
+Dt @ index-e570eeb6.js:1974
+Yt @ index-e570eeb6.js:1980
+Ie @ index-e570eeb6.js:1928
+wN @ index-e570eeb6.js:13801
+ns @ index-e570eeb6.js:13205
+Di @ index-e570eeb6.js:13159
+Sj @ index-e570eeb6.js:9663
+l @ index-e570eeb6.js:24280
+(anonymous) @ index-e570eeb6.js:24302
+(anonymous) @ index-e570eeb6.js:22707
+_useSession @ index-e570eeb6.js:22346Understand this warning
+index-e570eeb6.js:15454 ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+kF @ index-e570eeb6.js:15454
+nf @ index-e570eeb6.js:15456
+TF @ index-e570eeb6.js:15458
+(anonymous) @ index-e570eeb6.js:15707
+_u @ index-e570eeb6.js:12110
+BI @ index-e570eeb6.js:12934
+UI @ index-e570eeb6.js:12903
+MI @ index-e570eeb6.js:12894
+VI @ index-e570eeb6.js:12889
+E6 @ index-e570eeb6.js:13620
+Sc @ index-e570eeb6.js:13600
+(anonymous) @ index-e570eeb6.js:13570
+re @ index-e570eeb6.js:1835
+le @ index-e570eeb6.js:1824
+St @ index-e570eeb6.js:1962
+postMessage
+Dt @ index-e570eeb6.js:1974
+St @ index-e570eeb6.js:1964
+postMessage
+Dt @ index-e570eeb6.js:1974
+Yt @ index-e570eeb6.js:1980
+Ie @ index-e570eeb6.js:1928
+wN @ index-e570eeb6.js:13801
+ns @ index-e570eeb6.js:13205
+Di @ index-e570eeb6.js:13159
+Sj @ index-e570eeb6.js:9663
+l @ index-e570eeb6.js:24280
+(anonymous) @ index-e570eeb6.js:24302
+(anonymous) @ index-e570eeb6.js:22707
+_useSession @ index-e570eeb6.js:22346Understand this warning
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+(anonymous) @ index-e570eeb6.js:20025
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at index-e570eeb6.js:20025:37
+    at index-e570eeb6.js:20036:15
+    at new Promise (<anonymous>)
+    at KV (index-e570eeb6.js:20022:16)
+    at eU._refreshAccessToken (index-e570eeb6.js:22867:30)
+    at eU._callRefreshToken (index-e570eeb6.js:22954:58)
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+(anonymous) @ index-e570eeb6.js:20025
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:19981  POST https://burvwjzimfqjldmmzbfr.supabase.co/auth/v1/token?grant_type=refresh_token net::ERR_NAME_NOT_RESOLVED
+(anonymous) @ index-e570eeb6.js:19981
+cM @ index-e570eeb6.js:20214
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error
+index-e570eeb6.js:20216 TypeError: Failed to fetch
+    at index-e570eeb6.js:19981:51
+    at cM (index-e570eeb6.js:20214:23)
+    at zt (index-e570eeb6.js:20201:99)
+    at index-e570eeb6.js:22867:137
+    at async index-e570eeb6.js:20025:31
+cM @ index-e570eeb6.js:20216
+await in cM
+zt @ index-e570eeb6.js:20201
+(anonymous) @ index-e570eeb6.js:22867
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20025
+await in (anonymous)
+(anonymous) @ index-e570eeb6.js:20036
+KV @ index-e570eeb6.js:20022
+_refreshAccessToken @ index-e570eeb6.js:22867
+_callRefreshToken @ index-e570eeb6.js:22954
+_recoverAndRefresh @ index-e570eeb6.js:22929
+await in _recoverAndRefresh
+(anonymous) @ index-e570eeb6.js:23099
+(anonymous) @ index-e570eeb6.js:22311Understand this error

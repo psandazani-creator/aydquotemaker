@@ -1,0 +1,417 @@
+2 import { useRegisterSW } from 'virtual:pwa-register/react';
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:20:9 - error TS2345: Argument of type 'ContractAgreement | DraftContract | { id: undefined; senderParty: { name: string; address: string; phone: string; email: string; }; receiverParty: { name: string; address: string; phone: string; email: string; }; ... 4 more ...; createdAt: Date; }' is not assignable to parameter of type 'DraftContract | (() => DraftContract)'.
+  Type 'ContractAgreement' is not assignable to type 'DraftContract | (() => DraftContract)'.
+    Type 'ContractAgreement' is not assignable to type 'DraftContract'.
+      Types of property 'isOffline' are incompatible.
+        Type 'boolean | undefined' is not assignable to type 'boolean'.
+          Type 'undefined' is not assignable to type 'boolean'.
+
+ 20         contract || {
+            ~~~~~~~~~~~~~
+ 21             id: undefined,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+ 38             createdAt: new Date(),
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 39         }
+    ~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:240:32 - error TS2352: Conversion of type '{ id: string; userId: string; status: "draft" | "sent" | "signed" | "executed"; createdAt: string; updatedAt: string; senderSignedAt: string | undefined; receiverSignedAt: string | undefined; ... 7 more ...; receiverSignature?: string | undefined; }' to type 'DraftContract' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Types of property 'createdAt' are incompatible.
+    Type 'string' is not comparable to type 'Date'.
+
+240             if (onSave) onSave(serializedContract as DraftContract);
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:307:72 - error TS2345: Argument of type '"name"' is not assignable to parameter of type 'keyof DraftContract'.
+
+307                                     onChange={(e) => handleInputChange('name', e.target.value, 'senderParty')}
+                                                                           ~~~~~~
+
+src/components/Contracts/ContractForm.tsx:313:72 - error TS2345: Argument of type '"address"' is not assignable to parameter of type 'keyof DraftContract'.
+
+313                                     onChange={(e) => handleInputChange('address', e.target.value, 'senderParty')}
+                                                                           ~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:319:72 - error TS2345: Argument of type '"phone"' is not assignable to parameter of type 'keyof DraftContract'.
+
+319                                     onChange={(e) => handleInputChange('phone', e.target.value, 'senderParty')}
+                                                                           ~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:325:72 - error TS2345: Argument of type '"email"' is not assignable to parameter of type 'keyof DraftContract'.
+
+325                                     onChange={(e) => handleInputChange('email', e.target.value, 'senderParty')}
+                                                                           ~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:332:72 - error TS2345: Argument of type '"representativeName"' is not assignable to parameter of type 'keyof DraftContract'.
+
+332                                     onChange={(e) => handleInputChange('representativeName', e.target.value, 'senderParty')}
+                                                                           ~~~~~~~~~~~~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:342:72 - error TS2345: Argument of type '"name"' is not assignable to parameter of type 'keyof DraftContract'.
+
+342                                     onChange={(e) => handleInputChange('name', e.target.value, 'receiverParty')}
+                                                                           ~~~~~~
+
+src/components/Contracts/ContractForm.tsx:348:72 - error TS2345: Argument of type '"address"' is not assignable to parameter of type 'keyof DraftContract'.
+
+348                                     onChange={(e) => handleInputChange('address', e.target.value, 'receiverParty')}
+                                                                           ~~~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:354:72 - error TS2345: Argument of type '"phone"' is not assignable to parameter of type 'keyof DraftContract'.
+
+354                                     onChange={(e) => handleInputChange('phone', e.target.value, 'receiverParty')}
+                                                                           ~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:360:72 - error TS2345: Argument of type '"email"' is not assignable to parameter of type 'keyof DraftContract'.
+
+360                                     onChange={(e) => handleInputChange('email', e.target.value, 'receiverParty')}
+                                                                           ~~~~~~~
+
+src/components/Contracts/ContractForm.tsx:367:72 - error TS2345: Argument of type '"representativeName"' is not assignable to parameter of type 'keyof DraftContract'.
+
+367                                     onChange={(e) => handleInputChange('representativeName', e.target.value, 'receiverParty')}
+                                                                           ~~~~~~~~~~~~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:128:57 - error TS2345: Argument of type '() => DraftInvoice' is not assignable to parameter of type '{ customer: Customer; details: QuoteDetails; lineItems: LineItem[]; notes: string; selectedTemplate: string; }'.
+
+128   const { status: autoSaveStatus, flush } = useAutoSave(buildDraft, onAutoSave);
+                                                            ~~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:146:55 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+146       showNotification('Please add a customer name.', 'warning');
+                                                          ~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:163:54 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+163       showNotification('Customer name is required.', 'warning');
+                                                         ~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:167:55 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+167       showNotification('Add at least one line item.', 'warning');
+                                                          ~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:187:54 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+187       showNotification('Customer name is required.', 'warning');
+                                                         ~~~~~~~~~
+
+src/components/Invoices/InvoiceForm.tsx:225:10 - error TS2741: Property 'savedAt' is missing in type '{ status: AutoSaveStatus; }' but required in type 'Props'.
+
+225         <AutoSaveIndicator status={autoSaveStatus} />
+             ~~~~~~~~~~~~~~~~~
+
+  src/components/Common/AutoSaveIndicator.tsx:7:3
+    7   savedAt: Date | null;
+        ~~~~~~~
+    'savedAt' is declared here.
+
+src/components/Quotations/QuotationsPage.tsx:122:54 - error TS2339: Property 'start' does not exist on type 'never'.
+
+122         const startDate = new Date(filters.dateRange.start);
+                                                         ~~~~~
+
+src/components/Quotations/QuotationsPage.tsx:123:52 - error TS2339: Property 'end' does not exist on type 'never'.
+
+123         const endDate = new Date(filters.dateRange.end);
+                                                       ~~~
+
+src/components/Quotations/QuotationsPage.tsx:547:25 - error TS2322: Type '(newFilters: { dateRange: null; searchTerm: string; }) => void' is not assignable to type '(filters: { dateRange: { start: string; end: string; } | null; searchTerm: string; }) => void'.
+  Types of parameters 'newFilters' and 'filters' are incompatible.
+    Type '{ dateRange: { start: string; end: string; } | null; searchTerm: string; }' is not assignable to type '{ dateRange: null; searchTerm: string; }'.
+      Types of property 'dateRange' are incompatible.
+        Type '{ start: string; end: string; } | null' is not assignable to type 'null'.
+          Type '{ start: string; end: string; }' is not assignable to type 'null'.
+
+547           <QuoteFilters onFiltersChange={handleFiltersChange} />
+                            ~~~~~~~~~~~~~~~
+
+  src/components/Quotations/QuoteFilters.tsx:9:3
+    9   onFiltersChange: (filters: {
+        ~~~~~~~~~~~~~~~
+    The expected type comes from property 'onFiltersChange' which is declared here on type 'IntrinsicAttributes & QuoteFiltersProps'
+
+src/components/Quotations/QuotationsPage.tsx:730:11 - error TS2322: Type 'Quote | DraftQuote' is not assignable to type 'DraftQuote'.
+  Property 'isOffline' is missing in type 'Quote' but required in type 'DraftQuote'.
+
+730           quote={previewQuote}
+              ~~~~~
+
+  src/types/index.ts:93:3
+    93   isOffline: boolean;
+         ~~~~~~~~~
+    'isOffline' is declared here.
+  src/components/Quotations/QuotePreview.tsx:13:3
+    13   quote: DraftQuote;
+         ~~~~~
+    The expected type comes from property 'quote' which is declared here on type 'IntrinsicAttributes & QuotePreviewProps'
+
+src/components/Quotations/QuoteForm.tsx:149:104 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+149       showNotification('Add at least one line item with a name, quantity, and price to save as draft', 'warning');
+                                                                                                           ~~~~~~~~~
+
+src/components/Quotations/QuoteForm.tsx:171:53 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+171       showNotification('Customer name is required', 'warning');
+                                                        ~~~~~~~~~
+
+src/components/Quotations/QuoteForm.tsx:175:73 - error TS2345: Argument of type '"warning"' is not assignable to parameter of type '"error" | "success" | "info" | undefined'.
+
+175       showNotification('Add at least one line item with a description', 'warning');
+                                                                            ~~~~~~~~~
+
+src/components/Quotations/QuoteForm.tsx:194:11 - error TS2322: Type '"final"' is not assignable to type '"draft"'.
+
+194           status: 'final',
+              ~~~~~~
+
+  src/types/index.ts:92:3
+    92   status: 'draft';
+         ~~~~~~
+    The expected type comes from property 'status' which is declared here on type 'DraftQuote'
+
+src/components/Quotations/QuotePreview.tsx:42:3 - error TS18048: 'q.lineItems' is possibly 'undefined'.
+
+42 ${q.lineItems.map(item => `${item.description} - ${item.quantity} x ${formatCurrency(item.price, q.currency)} = ${formatCurrency(item.total, q.currency)}`).join('\n')}
+     ~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:83:12 - error TS2367: This comparison appears to be unintentional because the types '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"' and '"classic-white"' have no overlap.
+
+83           {hs === 'classic-white' && (
+              ~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:99:90 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+99                   <div className="cw-meta-row"><span>Valid Until</span><span>{formatDate(quote.details.validUntil)}</span></div>
+                                                                                            ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:123:20 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+123                   {quote.lineItems.map((item, i) => (
+                       ~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:136:18 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+136                 {quote.details.vatEnabled && (
+                     ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:137:61 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+137                   <div className="cw-total-row"><span>Tax ({quote.details.vatRate}%)</span><span>{formatCurrency(quote.tax, quote.currency)}</span></div>
+                                                                ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:155:12 - error TS2367: This comparison appears to be unintentional because the types '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"' and '"monochrome-elite"' have no overlap.
+
+155           {hs === 'monochrome-elite' && (
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:172:87 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+172                     <div className="mono-ref-row"><span>Valid</span><span>{formatDate(quote.details.validUntil)}</span></div>
+                                                                                          ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:195:20 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+195                   {quote.lineItems.map((item, i) => (
+                       ~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:208:18 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+208                 {quote.details.vatEnabled && (
+                     ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:209:63 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+209                   <div className="mono-total-row"><span>Tax ({quote.details.vatRate}%)</span><span>{formatCurrency(quote.tax, quote.currency)}</span></div>
+                                                                  ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:225:12 - error TS2367: This comparison appears to be unintentional because the types '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"' and '"navy-executive"' have no overlap.
+
+225           {hs === 'navy-executive' && (
+               ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:248:69 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+248                       <span className="navy-meta-value">{formatDate(quote.details.validUntil)}</span>
+                                                                        ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:276:20 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+276                   {quote.lineItems.map((item, i) => (
+                       ~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:290:20 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+290                   {quote.details.vatEnabled && (
+                       ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:291:65 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+291                     <div className="navy-total-row"><span>Tax ({quote.details.vatRate}%)</span><span>{formatCurrency(quote.tax, quote.currency)}</span></div>
+                                                                    ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:311:12 - error TS2367: This comparison appears to be unintentional because the types '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"' and '"forest-premium"' have no overlap.
+
+311           {hs === 'forest-premium' && (
+               ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:342:99 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+342                     <div className="forest-date-item"><span>Valid Until</span><strong>{formatDate(quote.details.validUntil)}</strong></div>
+                                                                                                      ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:356:22 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+356                     {quote.lineItems.map((item, i) => (
+                         ~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:370:22 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+370                     {quote.details.vatEnabled && (
+                         ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:371:69 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+371                       <div className="forest-total-row"><span>Tax ({quote.details.vatRate}%)</span><span>{formatCurrency(quote.tax, quote.currency)}</span></div>
+                                                                        ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:392:12 - error TS2367: This comparison appears to be unintentional because the types '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"' and '"crimson-prestige"' have no overlap.
+
+392           {hs === 'crimson-prestige' && (
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:413:93 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+413                   <div className="cr-meta-item"><span>Valid Until</span><strong>{formatDate(quote.details.validUntil)}</strong></div>
+                                                                                                ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:436:22 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+436                     {quote.lineItems.map((item, i) => (
+                         ~~~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:450:22 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+450                     {quote.details.vatEnabled && (
+                         ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:451:65 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+451                       <div className="cr-total-row"><span>Tax ({quote.details.vatRate}%)</span><span>{formatCurrency(quote.tax, quote.currency)}</span></div>
+                                                                    ~~~~~~~~~~~~~
+
+src/components/Quotations/QuotePreview.tsx:480:142 - error TS2345: Argument of type 'string | null | undefined' is not assignable to parameter of type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+
+480           <button className="btn btn-primary" onClick={() => generatePDF(quote, user?.companyName, user?.companyPhone, user?.companyAddress, quote.companyLogo || user?.companyLogo, selectedTemplate)}>
+                                                                                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/hooks/useAuth.ts:17:5 - error TS2322: Type 'string' is not assignable to type 'Date'.
+
+17     createdAt: new Date().toISOString(),
+       ~~~~~~~~~
+
+  src/types/index.ts:9:3
+    9   createdAt: Date;
+        ~~~~~~~~~
+    The expected type comes from property 'createdAt' which is declared here on type 'User'
+
+src/utils/pdfGenerator.ts:162:39 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+162   doc.text(`Valid Until: ${formatDate(quote.details.validUntil)}`, metaX, 72, { align: 'right' });
+                                          ~~~~~~~~~~~~~
+
+src/utils/pdfGenerator.ts:232:3 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+232   quote.lineItems.forEach((item, idx) => {
+      ~~~~~~~~~~~~~~~
+
+src/utils/pdfGenerator.ts:259:21 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+259   doc.rect(ml, y - (quote.lineItems.length * rowH) - thH, uw,
+                        ~~~~~~~~~~~~~~~
+
+src/utils/pdfGenerator.ts:260:12 - error TS18048: 'quote.lineItems' is possibly 'undefined'.
+
+260            quote.lineItems.length * rowH + thH, 'S');
+               ~~~~~~~~~~~~~~~
+
+src/utils/pdfGenerator.ts:282:7 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+282   if (quote.details.vatEnabled && quote.tax > 0) {
+          ~~~~~~~~~~~~~
+
+src/utils/pdfGenerator.ts:283:22 - error TS18048: 'quote.details' is possibly 'undefined'.
+
+283     doc.text(`Tax (${quote.details.vatRate}%)`,              totLX, y);
+                         ~~~~~~~~~~~~~
+
+src/utils/templates.ts:16:7 - error TS2322: Type '"classic-white"' is not assignable to type '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"'.
+
+16       headerStyle: 'classic-white',
+         ~~~~~~~~~~~
+
+  src/types/index.ts:83:3
+    83   headerStyle: 'centered' | 'split' | 'minimal' | 'professional' | 'minimal-modern' | 'sidebar' | 'dark-elegant' | 'gradient-card' | 'invoice-style';
+         ~~~~~~~~~~~
+    The expected type comes from property 'headerStyle' which is declared here on type 'TemplateStyles'
+
+src/utils/templates.ts:32:7 - error TS2322: Type '"monochrome-elite"' is not assignable to type '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"'.
+
+32       headerStyle: 'monochrome-elite',
+         ~~~~~~~~~~~
+
+  src/types/index.ts:83:3
+    83   headerStyle: 'centered' | 'split' | 'minimal' | 'professional' | 'minimal-modern' | 'sidebar' | 'dark-elegant' | 'gradient-card' | 'invoice-style';
+         ~~~~~~~~~~~
+    The expected type comes from property 'headerStyle' which is declared here on type 'TemplateStyles'
+
+src/utils/templates.ts:50:7 - error TS2322: Type '"navy-executive"' is not assignable to type '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"'.
+
+50       headerStyle: 'navy-executive',
+         ~~~~~~~~~~~
+
+  src/types/index.ts:83:3
+    83   headerStyle: 'centered' | 'split' | 'minimal' | 'professional' | 'minimal-modern' | 'sidebar' | 'dark-elegant' | 'gradient-card' | 'invoice-style';
+         ~~~~~~~~~~~
+    The expected type comes from property 'headerStyle' which is declared here on type 'TemplateStyles'
+
+src/utils/templates.ts:66:7 - error TS2322: Type '"forest-premium"' is not assignable to type '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"'.
+
+66       headerStyle: 'forest-premium',
+         ~~~~~~~~~~~
+
+  src/types/index.ts:83:3
+    83   headerStyle: 'centered' | 'split' | 'minimal' | 'professional' | 'minimal-modern' | 'sidebar' | 'dark-elegant' | 'gradient-card' | 'invoice-style';
+         ~~~~~~~~~~~
+    The expected type comes from property 'headerStyle' which is declared here on type 'TemplateStyles'
+
+src/utils/templates.ts:82:7 - error TS2322: Type '"crimson-prestige"' is not assignable to type '"centered" | "split" | "minimal" | "professional" | "minimal-modern" | "sidebar" | "dark-elegant" | "gradient-card" | "invoice-style"'.
+
+82       headerStyle: 'crimson-prestige',
+         ~~~~~~~~~~~
+
+  src/types/index.ts:83:3
+    83   headerStyle: 'centered' | 'split' | 'minimal' | 'professional' | 'minimal-modern' | 'sidebar' | 'dark-elegant' | 'gradient-card' | 'invoice-style';
+         ~~~~~~~~~~~
+    The expected type comes from property 'headerStyle' which is declared here on type 'TemplateStyles'
+
+
+Found 66 errors in 9 files.
+
+Errors  Files
+     1  src/components/Common/UpdatePrompt.tsx:2
+    12  src/components/Contracts/ContractForm.tsx:20
+     6  src/components/Invoices/InvoiceForm.tsx:128
+     4  src/components/Quotations/QuotationsPage.tsx:122
+     4  src/components/Quotations/QuoteForm.tsx:149
+    27  src/components/Quotations/QuotePreview.tsx:42
+     1  src/hooks/useAuth.ts:17
+     6  src/utils/pdfGenerator.ts:162
+     5  src/utils/templates.ts:16
+@preayden13-create ➜ /workspaces/aydquotemaker (main) $ 

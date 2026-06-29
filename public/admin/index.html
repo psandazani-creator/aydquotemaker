@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AydQuoteMaker — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Supabase removed — auth now uses Neon DB JWT via /api/auth/login -->
+  <style>
+    :root {
+      --bg:          #08080f;
+      --sidebar-bg:  #0b0b16;
+      --card:        #111120;
+      --card-2:      #161628;
+      --input-bg:    #1a1a2e;
+      --border:      rgba(255,255,255,.055);
+      --border-2:    rgba(255,255,255,.09);
+      --border-gold: rgba(212,175,55,.28);
+      --gold:        #d4af37;
+      --gold-lt:     #f0cc5a;
+      --gold-dk:     #a88520;
+      --gold-soft:   rgba(212,175,55,.08);
+      --gold-med:    rgba(212,175,55,.16);
+      --grad-gold:   linear-gradient(135deg,#d4af37 0%,#f0cc5a 55%,#c09820 100%);
+      --text:        #ededf5;
+      --text-sub:    #9898b8;
+      --text-muted:  #52527a;
+      --green:       #22c55e;
+      --blue:        #4f8ef7;
+      --red:         #ef4444;
+      --amber:       #f59e0b;
+      --purple:      #a78bfa;
+      --r:           10px;
+      --r-lg:        16px;
+      --r-xl:        22px;
+      --shadow:      0 8px 32px rgba(0,0,0,.55);
+      --shadow-gold: 0 8px 32px rgba(212,175,55,.14);
+      --sidebar-w:   256px;
+      --topbar-h:    60px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(212,175,55,.25);border-radius:99px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+    /* ─── LOGIN ────────────────────────────────────────────────── */
+    #loginModal{
+      position:fixed;inset:0;z-index:9000;display:none;
+      align-items:center;justify-content:center;
+      background:radial-gradient(ellipse 70% 50% at 55% 25%,rgba(212,175,55,.07),transparent),
+                 linear-gradient(160deg,#08080f 0%,#0d0d1e 100%);
+    }
+    .lc{
+      width:100%;max-width:400px;
+      background:var(--card);border:1px solid var(--border-gold);border-radius:var(--r-xl);
+      padding:2.4rem 2rem 2rem;
+      box-shadow:var(--shadow),var(--shadow-gold);
+      animation:popIn .32s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes popIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+    .lc-logo{
+      width:52px;height:52px;border-radius:14px;background:var(--grad-gold);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 1.1rem;font-size:1.3rem;color:#08080f;
+      box-shadow:0 6px 20px rgba(212,175,55,.35);
+    }
+    .lc h2{text-align:center;font-size:1.3rem;font-weight:800;letter-spacing:-.4px;
+      background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.25rem}
+    .lc-sub{text-align:center;font-size:.78rem;color:var(--text-muted);margin-bottom:1.7rem}
+    .lbl{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-sub);margin-bottom:.38rem}
+    .adm-input{
+      width:100%;background:var(--input-bg);border:1px solid var(--border-2);
+      border-radius:var(--r);padding:.72rem 1rem;color:var(--text);font-size:.88rem;
+      outline:none;transition:border-color .15s,box-shadow .15s;font-family:inherit;
+    }
+    .adm-input::placeholder{color:var(--text-muted)}
+    .adm-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.12)}
+    .pw-wrap{position:relative}
+    .pw-wrap .adm-input{padding-right:2.8rem}
+    .pw-toggle{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:.88rem;transition:color .15s;padding:.2rem}
+    .pw-toggle:hover{color:var(--gold)}
+    #loginBtn{
+      width:100%;padding:.78rem;border:none;border-radius:var(--r);
+      background:var(--grad-gold);color:#08080f;font-size:.88rem;font-weight:700;
+      cursor:pointer;transition:opacity .15s,transform .15s;
+      display:flex;align-items:center;justify-content:center;gap:.5rem;
+      box-shadow:0 4px 18px rgba(212,175,55,.3);font-family:inherit;
+    }
+    #loginBtn:hover{opacity:.88;transform:translateY(-1px)}
+    #loginBtn:active{transform:translateY(0)}
+    #googleLoginBtn{
+      width:100%;padding:.75rem;border:1px solid var(--border-2);border-radius:var(--r);
+      background:rgba(255,255,255,.04);color:var(--text);font-size:.88rem;font-weight:600;
+      cursor:pointer;margin-top:.85rem;transition:all .15s;
+      display:flex;align-items:center;justify-content:center;gap:.6rem;font-family:inherit;
+    }
+    #googleLoginBtn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18)}
+    .lc-divider{display:flex;align-items:center;gap:.7rem;margin:1rem 0 0;color:var(--text-muted);font-size:.74rem}
+    .lc-divider span:first-child,.lc-divider span:last-child{flex:1;height:1px;background:var(--border-2)}
+    #loginError,#loginSuccess{border-radius:var(--r);padding:.58rem .85rem;font-size:.78rem;margin-bottom:.9rem}
+    #loginError{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5}
+    #loginSuccess{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#86efac}
+    .lc-secure{text-align:center;font-size:.64rem;color:var(--text-muted);margin-top:1.2rem}
+    #loadingState{text-align:center;padding:1.5rem 0}
+
+    /* ─── APP SHELL ─────────────────────────────────────────────── */
+    #appShell{display:flex;height:100vh;overflow:hidden}
+
+    /* ─── SIDEBAR ───────────────────────────────────────────────── */
+    #sidebar{
+      width:var(--sidebar-w);flex-shrink:0;height:100%;
+      background:var(--sidebar-bg);border-right:1px solid var(--border);
+      display:flex;flex-direction:column;overflow:hidden;
+      transition:transform .28s cubic-bezier(.16,1,.3,1);z-index:200;
+    }
+    .sb-top{
+      padding:1.1rem 1rem .9rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+    }
+    .sb-brand{display:flex;align-items:center;gap:.65rem}
+    .sb-icon{
+      width:36px;height:36px;border-radius:10px;background:var(--grad-gold);
+      display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#08080f;
+      box-shadow:0 3px 12px rgba(212,175,55,.3);flex-shrink:0;
+    }
+    .sb-brand-name{font-size:.9rem;font-weight:800;letter-spacing:-.3px;
+      background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sb-brand-sub{font-size:.6rem;color:var(--text-muted);margin-top:1px;font-weight:500}
+    #closeSidebarBtn{display:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;padding:.3rem;border-radius:6px;transition:all .15s}
+    #closeSidebarBtn:hover{color:var(--text);background:var(--card-2)}
+    .sb-body{flex:1;overflow-y:auto;padding:.6rem .75rem;display:flex;flex-direction:column;gap:.15rem}
+    .sb-section-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);padding:.55rem .5rem .25rem;margin-top:.2rem}
+    .sb-item{
+      display:flex;align-items:center;gap:.7rem;
+      padding:.58rem .7rem;border-radius:8px;cursor:pointer;
+      color:var(--text-sub);font-size:.82rem;font-weight:500;
+      transition:all .14s;user-select:none;position:relative;
+    }
+    .sb-item:hover{background:var(--card-2);color:var(--text)}
+    .sb-item.active{background:var(--gold-soft);color:var(--gold)}
+    .sb-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:2.5px;background:var(--gold);border-radius:0 2px 2px 0}
+    .sb-item i{width:16px;text-align:center;font-size:.78rem;flex-shrink:0}
+    .sb-item.active i{color:var(--gold)}
+    .sb-divider{height:1px;background:var(--border);margin:.4rem 0}
+    .sb-foot{
+      border-top:1px solid var(--border);padding:.9rem 1rem;flex-shrink:0;
+      display:flex;align-items:center;gap:.6rem;
+    }
+    .sb-status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 7px rgba(34,197,94,.5)}
+    .sb-foot-text{font-size:.67rem;color:var(--text-muted)}
+
+    /* ─── MAIN AREA ─────────────────────────────────────────────── */
+    #mainArea{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+    /* ─── TOPBAR ─────────────────────────────────────────────────── */
+    .topbar{
+      height:var(--topbar-h);flex-shrink:0;
+      background:rgba(8,8,15,.88);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 1.5rem;gap:1rem;z-index:100;
+    }
+    .topbar-left{display:flex;align-items:center;gap:.85rem}
+    #hamburgerBtn{
+      display:none;background:none;border:none;color:var(--text-sub);cursor:pointer;
+      width:34px;height:34px;border-radius:8px;font-size:1rem;
+      align-items:center;justify-content:center;transition:all .14s;
+    }
+    #hamburgerBtn:hover{background:var(--card-2);color:var(--text)}
+    .topbar-page-title{font-size:.92rem;font-weight:700;color:var(--text);letter-spacing:-.2px}
+    .topbar-right{display:flex;align-items:center;gap:.7rem}
+    .user-pill{
+      display:flex;align-items:center;gap:.55rem;
+      background:var(--card);border:1px solid var(--border-2);
+      border-radius:99px;padding:.28rem .9rem .28rem .35rem;
+    }
+    .user-avatar{
+      width:26px;height:26px;border-radius:50%;background:var(--grad-gold);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.6rem;font-weight:800;color:#08080f;flex-shrink:0;
+    }
+    #adminEmailTop{font-size:.74rem;color:var(--text-sub);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    #logoutTop{
+      background:none;border:1px solid var(--border-2);border-radius:8px;
+      padding:.38rem .85rem;color:var(--text-muted);font-size:.75rem;font-weight:500;
+      cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:all .14s;font-family:inherit;
+    }
+    #logoutTop:hover{border-color:var(--border-gold);color:var(--gold);background:var(--gold-soft)}
+
+    /* ─── PAGE CONTENT ───────────────────────────────────────────── */
+    #pageContent{flex:1;overflow-y:auto;padding:1.75rem 2rem 3rem}
+
+    /* ─── STAT CARDS ─────────────────────────────────────────────── */
+    .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-bottom:1.75rem}
+    .stat-card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);
+      padding:1.25rem 1.3rem 1.1rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+    }
+    .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px}
+    .stat-card:hover{transform:translateY(-2px);border-color:var(--border-2)}
+    .stat-card--gold:hover{border-color:var(--border-gold);box-shadow:0 0 0 1px rgba(212,175,55,.1),var(--shadow-gold)}
+    .stat-card--green:hover{border-color:rgba(34,197,94,.3);box-shadow:0 8px 28px rgba(34,197,94,.1)}
+    .stat-card--blue:hover{border-color:rgba(79,142,247,.3);box-shadow:0 8px 28px rgba(79,142,247,.1)}
+    .stat-card--amber:hover{border-color:rgba(245,158,11,.3);box-shadow:0 8px 28px rgba(245,158,11,.1)}
+    .stat-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem}
+    .stat-icon{
+      width:40px;height:40px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;font-size:.9rem;
+    }
+    .stat-icon--gold{background:var(--gold-soft);color:var(--gold)}
+    .stat-icon--green{background:rgba(34,197,94,.1);color:var(--green)}
+    .stat-icon--blue{background:rgba(79,142,247,.1);color:var(--blue)}
+    .stat-icon--amber{background:rgba(245,158,11,.1);color:var(--amber)}
+    .stat-trend{font-size:.67rem;font-weight:600;padding:2px 7px;border-radius:99px;display:flex;align-items:center;gap:3px}
+    .stat-trend--up{background:rgba(34,197,94,.1);color:var(--green)}
+    .stat-trend--neutral{background:rgba(148,148,184,.1);color:var(--text-muted)}
+    .stat-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin-bottom:.3rem}
+    .stat-value{font-size:2.1rem;font-weight:900;letter-spacing:-1.5px;line-height:1}
+    .stat-value--gold{color:var(--gold)}
+    .stat-value--green{color:var(--green)}
+    .stat-value--blue{color:var(--blue)}
+    .stat-value--amber{color:var(--amber)}
+    .stat-sub{font-size:.67rem;color:var(--text-muted);margin-top:.4rem}
+
+    /* ─── PANEL ──────────────────────────────────────────────────── */
+    #dynamicPanel{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+    .panel-header{
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;
+      padding:1rem 1.3rem;border-bottom:1px solid var(--border);
+      background:var(--card-2);
+    }
+    #panelTitle{font-size:.9rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem}
+    #panelTitle i{color:var(--gold)}
+    .panel-controls{display:flex;align-items:center;gap:.5rem}
+    .panel-controls label{font-size:.72rem;color:var(--text-muted)}
+    #paginationSizeSelect{
+      background:var(--input-bg);border:1px solid var(--border-2);border-radius:7px;
+      padding:.3rem .55rem;color:var(--text);font-size:.76rem;cursor:pointer;outline:none;
+      transition:border-color .14s;font-family:inherit;
+    }
+    #paginationSizeSelect:focus{border-color:var(--gold)}
+
+    /* ─── TABLE ──────────────────────────────────────────────────── */
+    .data-table{width:100%;border-collapse:collapse;font-size:.81rem}
+    .data-table th{
+      padding:.75rem 1rem;text-align:left;
+      font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.65px;
+      color:var(--text-muted);background:var(--card-2);border-bottom:1px solid var(--border);
+      white-space:nowrap;
+    }
+    .data-table th:first-child{padding-left:1.3rem}
+    .data-table th:last-child{padding-right:1.3rem;text-align:center}
+    .data-table td{padding:.8rem 1rem;border-bottom:1px solid var(--border);color:var(--text-sub);vertical-align:middle}
+    .data-table td:first-child{padding-left:1.3rem}
+    .data-table td:last-child{padding-right:1.3rem;text-align:center}
+    .data-table tbody tr{transition:background .1s}
+    .data-table tbody tr:hover{background:rgba(212,175,55,.04)}
+    .data-table tbody tr:last-child td{border-bottom:none}
+    .data-table strong,.data-table .fw{color:var(--text);font-weight:600}
+    .user-row{display:flex;align-items:center;gap:.7rem}
+    .user-av{
+      width:32px;height:32px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.65rem;font-weight:800;color:#fff;flex-shrink:0;
+    }
+    .user-av-name{font-weight:600;color:var(--text);font-size:.82rem;line-height:1.2}
+    .user-av-email{font-size:.71rem;color:var(--text-muted)}
+
+    /* ─── BADGES ─────────────────────────────────────────────────── */
+    .badge{
+      display:inline-flex;align-items:center;gap:.28rem;
+      padding:2px 9px;border-radius:99px;font-size:.63rem;font-weight:700;
+      letter-spacing:.35px;text-transform:uppercase;white-space:nowrap;
+    }
+    .badge--gold{background:var(--gold-soft);color:var(--gold);border:1px solid var(--border-gold)}
+    .badge--gold:hover{background:var(--gold-med)}
+    .badge--green{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.22)}
+    .badge--red{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.22)}
+    .badge--blue{background:rgba(79,142,247,.1);color:var(--blue);border:1px solid rgba(79,142,247,.22)}
+    .badge--amber{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.22)}
+    .badge--muted{background:rgba(148,148,184,.08);color:var(--text-muted);border:1px solid var(--border)}
+    .badge--purple{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.22)}
+    .license-key{
+      font-family:'SF Mono','Consolas',monospace;
+      background:var(--input-bg);border:1px solid var(--border);
+      border-radius:5px;padding:2px 7px;font-size:.68rem;letter-spacing:.3px;color:var(--text-sub);
+    }
+
+    /* ─── ACTION BUTTONS ─────────────────────────────────────────── */
+    .action-btn{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.34rem .75rem;border-radius:7px;font-size:.72rem;font-weight:600;
+      cursor:pointer;transition:all .14s;border:1px solid var(--border-gold);
+      background:var(--gold-soft);color:var(--gold);font-family:inherit;
+    }
+    .action-btn:hover{background:var(--gold);color:#08080f;border-color:var(--gold);transform:translateY(-1px)}
+    .action-btn-danger{background:rgba(239,68,68,.08);color:var(--red);border-color:rgba(239,68,68,.22)}
+    .action-btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
+    .action-btn-green{background:rgba(34,197,94,.08);color:var(--green);border-color:rgba(34,197,94,.22)}
+    .action-btn-green:hover{background:var(--green);color:#fff;border-color:var(--green)}
+
+    /* ─── PAGINATION ─────────────────────────────────────────────── */
+    #paginationControls{display:flex;align-items:center;justify-content:center;gap:.3rem;flex-wrap:wrap;padding:.85rem 1.3rem;border-top:1px solid var(--border)}
+    #paginationControls button{
+      background:var(--card-2);border:1px solid var(--border);color:var(--text-muted);
+      border-radius:7px;padding:.3rem .68rem;font-size:.75rem;cursor:pointer;
+      transition:all .14s;min-width:32px;font-family:inherit;
+    }
+    #paginationControls button:hover{border-color:var(--border-gold);color:var(--gold)}
+    #paginationControls button.active-page{background:var(--gold);color:#08080f;border-color:var(--gold);font-weight:700}
+
+    /* ─── TABS ───────────────────────────────────────────────────── */
+    .tabs-container{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.3rem}
+    .tab-button{
+      flex:1;padding:.78rem 1rem;background:transparent;border:none;
+      color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;
+      transition:all .18s;border-bottom:2px solid transparent;margin-bottom:-1px;
+      text-transform:uppercase;letter-spacing:.4px;font-family:inherit;
+    }
+    .tab-button:hover{color:var(--text-sub)}
+    .tab-button.active{color:var(--gold);border-bottom-color:var(--gold)}
+    .tab-content{display:none}
+    .tab-content.active{display:block;animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+    /* ─── FORM CONTROLS ──────────────────────────────────────────── */
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;margin-bottom:.35rem;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.55px;color:var(--text-sub)}
+    .form-group select,.form-group input{
+      width:100%;padding:.64rem .9rem;
+      background:var(--input-bg);border:1px solid var(--border-2);
+      border-radius:var(--r);color:var(--text);font-size:.84rem;
+      transition:border-color .14s,box-shadow .14s;outline:none;font-family:inherit;
+    }
+    .form-group select:focus,.form-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
+
+    /* ─── MODALS ─────────────────────────────────────────────────── */
+    .modal-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000;padding:1rem}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(4,4,10,.78);backdrop-filter:blur(6px)}
+    .modal-box{
+      background:var(--card);border:1px solid var(--border-gold);border-radius:var(--r-xl);
+      box-shadow:0 30px 70px rgba(0,0,0,.7),0 0 0 1px rgba(212,175,55,.07);
+      width:100%;max-width:460px;position:relative;z-index:1;
+      animation:popIn .28s cubic-bezier(.16,1,.3,1) both;
+      max-height:90vh;overflow-y:auto;
+    }
+    .modal-hdr{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.2rem 1.4rem .9rem;border-bottom:1px solid var(--border);
+      position:sticky;top:0;background:var(--card);z-index:2;
+    }
+    #modalTitle{font-size:.9rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.45rem}
+    #modalTitle i{color:var(--gold)}
+    #closeModalBtn{
+      background:none;border:none;color:var(--text-muted);font-size:1.1rem;
+      cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+      border-radius:7px;transition:all .14s;
+    }
+    #closeModalBtn:hover{background:var(--card-2);color:var(--text)}
+    #modalBodyContent{padding:1.2rem 1.4rem}
+    .modal-footer{display:flex;gap:.5rem;justify-content:flex-end;padding:.9rem 1.4rem 1.2rem;border-top:1px solid var(--border)}
+    .btn-cancel{
+      background:var(--card-2);border:1px solid var(--border-2);color:var(--text-sub);
+      border-radius:8px;padding:.5rem 1rem;font-size:.78rem;font-weight:600;
+      cursor:pointer;transition:all .14s;font-family:inherit;
+    }
+    .btn-cancel:hover{border-color:var(--border-gold);color:var(--text)}
+    .btn-confirm{
+      background:var(--grad-gold);color:#08080f;border:none;
+      border-radius:8px;padding:.5rem 1.2rem;font-size:.78rem;font-weight:700;
+      cursor:pointer;transition:opacity .14s,transform .14s;font-family:inherit;
+    }
+    .btn-confirm:hover{opacity:.88;transform:translateY(-1px)}
+    .info-block{background:var(--card-2);border:1px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.85rem}
+    .info-block-title{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gold);margin-bottom:.6rem}
+    .info-row{display:flex;gap:.5rem;font-size:.78rem;line-height:1.8}
+    .info-row .lk{color:var(--text-muted);min-width:70px;flex-shrink:0}
+    .info-row .lv{color:var(--text)}
+
+    /* ─── USER OPTIONS BUTTONS (opts-btn) ────────────────────────── */
+    .opts-btn{
+      display:flex;align-items:center;gap:.55rem;width:100%;
+      padding:.72rem 1rem;border-radius:9px;font-size:.8rem;font-weight:600;
+      cursor:pointer;transition:all .14s;text-align:left;font-family:inherit;
+      border:1.5px solid transparent;
+    }
+    .opts-btn--primary{background:rgba(212,175,55,.1);border-color:rgba(212,175,55,.3);color:var(--gold)}
+    .opts-btn--primary:hover{background:rgba(212,175,55,.18);border-color:var(--gold)}
+    .opts-btn--secondary{background:var(--card-2);border-color:var(--border-2);color:var(--text-sub)}
+    .opts-btn--secondary:hover{border-color:var(--border-gold);color:var(--text)}
+    .opts-btn--success{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);color:var(--green)}
+    .opts-btn--success:hover{background:rgba(34,197,94,.15)}
+    .opts-btn--danger{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.22);color:var(--red)}
+    .opts-btn--danger:hover{background:rgba(239,68,68,.14)}
+
+    /* ─── MANAGE LICENSE MODAL TABS ──────────────────────────────── */
+    .mlm-tab{
+      flex:1;padding:.8rem 1rem;background:transparent;border:none;
+      border-bottom:2.5px solid transparent;margin-bottom:-1.5px;
+      color:var(--text-muted);font-size:.8rem;font-weight:600;cursor:pointer;
+      transition:color .14s,border-color .14s;font-family:inherit;
+      display:flex;align-items:center;justify-content:center;gap:.4rem;
+    }
+    .mlm-tab:hover{color:var(--text-sub)}
+    .mlm-tab--active{color:var(--gold);border-bottom-color:var(--gold)}
+    .mlm-pane{padding:1rem 1.4rem 1.4rem}
+
+    /* ─── SPINNER ────────────────────────────────────────────────── */
+    #dataSpinner{position:fixed;inset:0;background:rgba(8,8,15,.72);backdrop-filter:blur(8px);z-index:800;display:flex;align-items:center;justify-content:center}
+    .spin-ring{width:48px;height:48px;border-radius:50%;border:3px solid var(--border-gold);border-top-color:var(--gold);animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ─── TOAST ──────────────────────────────────────────────────── */
+    #toastContainer{position:fixed;top:1rem;right:1rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
+    .toast{
+      display:flex;align-items:center;gap:.6rem;
+      padding:.65rem 1rem;border-radius:var(--r);font-size:.8rem;font-weight:600;
+      min-width:240px;max-width:340px;pointer-events:all;
+      box-shadow:var(--shadow);animation:toastIn .3s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+    .toast--success{background:#14532d;border:1px solid rgba(34,197,94,.3);color:#86efac}
+    .toast--error{background:#450a0a;border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+    .toast--info{background:#1e3a5f;border:1px solid rgba(79,142,247,.3);color:#93c5fd}
+
+    /* ─── SETTINGS PANEL ─────────────────────────────────────────── */
+    .settings-card{background:var(--card-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.4rem 1.5rem;margin-bottom:1.25rem}
+    .settings-card--gold{border-color:var(--border-gold);background:rgba(212,175,55,.04)}
+    .settings-card-hdr{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem}
+    .settings-card-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .settings-card-icon--gold{background:var(--gold-soft);color:var(--gold)}
+    .settings-card-icon--green{background:rgba(34,197,94,.1);color:var(--green)}
+    .settings-card-icon--blue{background:rgba(79,142,247,.1);color:var(--blue)}
+    .settings-card-title{font-weight:700;font-size:.92rem;color:var(--text)}
+    .settings-card-sub{font-size:.72rem;color:var(--text-muted);margin-top:1px}
+    .settings-divider{height:1px;background:var(--border);margin:.9rem 0}
+
+    /* ─── OVERLAY (mobile sidebar) ───────────────────────────────── */
+    #sidebarOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;backdrop-filter:blur(3px)}
+    #authLoader{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+    #authLoader .spin-ring{width:44px;height:44px;border:3px solid var(--border-gold);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media(max-width:900px){
+      .stat-grid{grid-template-columns:repeat(2,1fr)}
+      #sidebar{position:fixed;transform:translateX(-100%)}
+      #sidebar.open{transform:translateX(0)}
+      #sidebarOverlay{display:block;opacity:0;pointer-events:none;transition:opacity .28s}
+      #sidebarOverlay.active{opacity:1;pointer-events:all}
+      #hamburgerBtn{display:flex}
+      #closeSidebarBtn{display:flex}
+      #pageContent{padding:1.25rem 1rem 2.5rem}
+      .topbar{padding:0 1rem}
+    }
+    @media(max-width:520px){
+      .stat-grid{grid-template-columns:1fr}
+      .user-pill{display:none}
+      #pageContent{padding:1rem .75rem 2rem}
+    }
+
+    .hidden{display:none!important}
+    .text-emerald-400{color:#4ade80!important}
+    .text-rose-400{color:#f87171!important}
+    .text-amber-400{color:#fbbf24!important}
+  </style>
+</head>
+<body>
+
+<!-- ═══ AUTH LOADER ══════════════════════════════════════════════════ -->
+<div id="authLoader"><div class="spin-ring"></div></div>
+
+<!-- ═══ LOGIN ═══════════════════════════════════════════════════════ -->
+<div id="loginModal" style="display:none;">
+  <div class="lc">
+    <div class="lc-logo"><i class="fas fa-shield-halved"></i></div>
+    <h2>Admin Access</h2>
+    <p class="lc-sub">Sign in to the AydQuoteMaker command centre</p>
+
+    <div id="loginError" class="hidden"></div>
+    <div id="loginSuccess" class="hidden"></div>
+
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="lbl">Email address</label>
+        <input type="email" id="adminEmail" class="adm-input" placeholder="admin@aydquote.com" autocomplete="email">
+      </div>
+      <div class="form-group" style="margin-bottom:1.3rem">
+        <label class="lbl">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="adminPassword" class="adm-input" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" id="togglePasswordBtn" class="pw-toggle" tabindex="-1"><i class="far fa-eye-slash"></i></button>
+        </div>
+      </div>
+      <button id="loginBtn"><i class="fas fa-arrow-right-to-bracket"></i> Sign in to Dashboard</button>
+      <div class="lc-divider"><span></span><span>or</span><span></span></div>
+      <button type="button" id="googleLoginBtn"><i class="fab fa-google" style="color:#ea4335"></i> Continue with Google</button>
+    </div>
+
+    <div id="loadingState" class="hidden">
+      <div class="spin-ring" style="width:38px;height:38px;margin:0 auto .7rem;"></div>
+      <p style="font-size:.76rem;color:var(--text-muted)">Authenticating…</p>
+    </div>
+
+    <p class="lc-secure"><i class="fas fa-lock" style="margin-right:.3rem"></i> Secured by Supabase Authentication</p>
+  </div>
+</div>
+
+<!-- ═══ TOAST CONTAINER ═══════════════════════════════════════════════ -->
+<div id="toastContainer"></div>
+
+<!-- ═══ DATA SPINNER ══════════════════════════════════════════════════ -->
+<div id="dataSpinner" class="hidden">
+  <div style="text-align:center">
+    <div class="spin-ring" style="margin:0 auto .8rem"></div>
+    <p style="font-size:.76rem;color:var(--text-muted);font-weight:500">Loading data…</p>
+  </div>
+</div>
+
+<!-- ═══ APP SHELL ═════════════════════════════════════════════════════ -->
+<div id="appShell" style="display:none">
+
+  <!-- SIDEBAR OVERLAY (mobile) -->
+  <div id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sb-top">
+      <div class="sb-brand">
+        <div class="sb-icon"><i class="fas fa-shield-halved"></i></div>
+        <div>
+          <div class="sb-brand-name">AydQuoteMaker</div>
+          <div class="sb-brand-sub">Admin Panel v2.0</div>
+        </div>
+      </div>
+      <button id="closeSidebarBtn"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="sb-body">
+      <div class="sb-section-lbl">Management</div>
+      <div id="menuTotalUsers" class="sb-item active">
+        <i class="fas fa-users"></i><span>All Users</span>
+      </div>
+
+      <div class="sb-divider"></div>
+      <div class="sb-section-lbl">System</div>
+      <div id="menuAuditLog" class="sb-item">
+        <i class="fas fa-shield-halved"></i><span>Audit Log</span>
+      </div>
+      <div id="menuSettings" class="sb-item">
+        <i class="fas fa-sliders"></i><span>Settings &amp; Tools</span>
+      </div>
+    </div>
+
+    <div class="sb-foot">
+      <div class="sb-status-dot"></div>
+      <span class="sb-foot-text">System operational</span>
+    </div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div id="mainArea">
+
+    <!-- TOPBAR -->
+    <div class="topbar" id="dashboardMain" style="display:flex">
+      <div class="topbar-left">
+        <button id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+        <span class="topbar-page-title" id="topbarPageTitle">Dashboard Overview</span>
+      </div>
+      <div class="topbar-right">
+        <div class="user-pill">
+          <div class="user-avatar" id="userAvatarInitial">A</div>
+          <span id="adminEmailTop">admin@aydquote.com</span>
+        </div>
+        <button id="logoutTop"><i class="fas fa-arrow-right-from-bracket"></i><span style="display:none" class="lg-label"> Sign out</span></button>
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div id="pageContent">
+
+      <!-- Stat cards -->
+      <div class="stat-grid">
+        <div id="statTotalUsersBox" class="stat-card stat-card--gold">
+          <div class="stat-card-top">
+            <div class="stat-icon stat-icon--gold"><i class="fas fa-users"></i></div>
+            <span class="stat-trend stat-trend--neutral"><i class="fas fa-minus" style="font-size:.6rem"></i> users</span>
+          </div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-value stat-value--gold" id="statTotalUsers">—</div>
+          <div class="stat-sub">All registered accounts</div>
+        </div>
+
+        <div id="statActiveLicensesBox" class="stat-card stat-card--green">
+          <div class="stat-card-top">
+            <div class="stat-icon stat-icon--green"><i class="fas fa-key"></i></div>
+            <span class="stat-trend stat-trend--up"><i class="fas fa-check" style="font-size:.58rem"></i> active</span>
+          </div>
+          <div class="stat-label">Active Licenses</div>
+          <div class="stat-value stat-value--green" id="statActiveLicenses">—</div>
+          <div class="stat-sub">Currently enabled licenses</div>
+        </div>
+
+        <div id="statPendingBox" class="stat-card stat-card--amber">
+          <div class="stat-card-top">
+            <div class="stat-icon stat-icon--amber"><i class="fas fa-triangle-exclamation"></i></div>
+            <span class="stat-trend stat-trend--neutral"><i class="fas fa-flag" style="font-size:.58rem"></i> review</span>
+          </div>
+          <div class="stat-label">Pending Flags</div>
+          <div class="stat-value stat-value--amber" id="statPendingPayments">—</div>
+          <div class="stat-sub">Items needing attention</div>
+        </div>
+
+        <div id="statDevicesBox" class="stat-card stat-card--blue">
+          <div class="stat-card-top">
+            <div class="stat-icon stat-icon--blue"><i class="fas fa-laptop-code"></i></div>
+            <span class="stat-trend stat-trend--neutral"><i class="fas fa-desktop" style="font-size:.58rem"></i> devices</span>
+          </div>
+          <div class="stat-label">Total Devices</div>
+          <div class="stat-value stat-value--blue" id="statDevices">—</div>
+          <div class="stat-sub">Registered devices</div>
+        </div>
+      </div>
+
+      <!-- Dynamic panel -->
+      <div id="dynamicPanel">
+        <div class="panel-header">
+          <h3 id="panelTitle"><i class="fas fa-users"></i> Registered Users</h3>
+          <div class="panel-controls">
+            <label for="paginationSizeSelect">Show</label>
+            <select id="paginationSizeSelect">
+              <option value="5">5 rows</option>
+              <option value="10" selected>10 rows</option>
+              <option value="25">25 rows</option>
+              <option value="50">50 rows</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead><tr id="dynamicTableHeader"></tr></thead>
+            <tbody id="dynamicTableBody">
+              <tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--text-muted)">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="paginationControls"></div>
+      </div>
+
+    </div><!-- /pageContent -->
+  </div><!-- /mainArea -->
+</div><!-- /appShell -->
+
+<!-- ═══ MANAGE MODAL ══════════════════════════════════════════════════ -->
+<div id="actionModal" class="modal-wrap hidden">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <h3 id="modalTitle"><i class="fas fa-cog"></i> Manage License</h3>
+      <button id="closeModalBtn"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div id="modalBodyContent"></div>
+    <div class="modal-footer flex gap-3 mt-6 justify-end">
+      <button id="modalCancelBtn" class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GENERATE LICENSE MODAL ════════════════════════════════════════ -->
+<div id="generateLicenseModal" class="modal-wrap hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <h3 style="font-size:.9rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.45rem">
+        <i class="fas fa-key" style="color:var(--gold)"></i> Update User License
+      </h3>
+    </div>
+    <div style="padding:1.2rem 1.4rem">
+      <div class="form-group">
+        <label>Select User</label>
+        <select id="genUserEmailSelect"><option value="">Choose a user…</option></select>
+      </div>
+      <div class="form-group">
+        <label>License Tier</label>
+        <select id="genUserTier">
+          <option value="free">Free — 2 devices</option>
+          <option value="pro" selected>Pro — 5 devices</option>
+          <option value="lifetime">Lifetime — 10 devices</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="cancelGenModal" class="btn-cancel">Cancel</button>
+      <button id="confirmGenLicense" class="btn-confirm">Generate &amp; Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// NEON DB JWT AUTH + GLOBAL STATE
+// Auth uses /api/auth/login → JWT stored in localStorage ('aydqm_token').
+// Every API call reads idToken from localStorage via getToken().
+// ═══════════════════════════════════════════════════════════════════════
+const TOKEN_KEY = 'aydqm_token';
+
+let currentUser    = null;
+let idToken        = null;  // kept in sync with localStorage on every auth change
+let allUsers       = [];
+let totalUsersCount = 0;
+let currentView    = 'users';
+let currentPage    = 1;
+let pageSize       = 10;
+
+function getToken(){ return localStorage.getItem(TOKEN_KEY); }
+function saveToken(t){ localStorage.setItem(TOKEN_KEY, t); idToken = t; }
+function clearToken(){ localStorage.removeItem(TOKEN_KEY); idToken = null; }
+
+const AV_COLORS = ['#7c3aed','#db2777','#ea580c','#16a34a','#0284c7','#be185d','#0f766e','#9333ea'];
+function avatarColor(str){ let h=0;for(let c of (str||'A'))h=c.charCodeAt(0)+((h<<5)-h);return AV_COLORS[Math.abs(h)%AV_COLORS.length]; }
+function avatarInitial(name){ return (name||'?').trim()[0].toUpperCase(); }
+
+// On page load: restore token from localStorage and verify admin status.
+async function initAuth(){
+  idToken = getToken();
+  if(idToken){ await onAuthSuccess(); }
+  else { showLoginModal(); }
+}
+initAuth();
+
+// ═══════════════════════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════════════════════
+function hideAuthLoader(){
+  const el = document.getElementById('authLoader');
+  if(el) el.style.display='none';
+}
+function showLoginModal(){
+  hideAuthLoader();
+  document.getElementById('loginModal').style.display='flex';
+  document.getElementById('appShell').style.display='none';
+}
+
+/**
+ * Calls /api/admin/verify with the current JWT to confirm the user
+ * has isAdmin=true in the Neon DB. On failure, clears the token and
+ * returns to the login screen.
+ */
+async function verifyAdminAccess(){
+  if(!idToken) return false;
+  try {
+    const res = await fetch('/api/admin/verify', {
+      headers: { 'Authorization': `Bearer ${idToken}` }
+    });
+    if(res.status === 401){
+      clearToken(); currentUser = null; allUsers = [];
+      showLoginModal();
+      showLoginError('Session expired. Please sign in again.');
+      return false;
+    }
+    const json = await res.json();
+    if(!json.isAdmin){
+      clearToken(); currentUser = null; allUsers = [];
+      showLoginModal();
+      showLoginError('Access denied. This account does not have administrator privileges.');
+      return false;
+    }
+    return true;
+  } catch(e){
+    console.error('Admin verification failed:', e);
+    showLoginError('Could not reach the server to verify admin status. Please try again.');
+    return false;
+  }
+}
+
+async function onAuthSuccess(){
+  const isAdminOk = await verifyAdminAccess();
+  if(!isAdminOk) return;
+  // Populate currentUser from the server so the UI can show the admin's email.
+  // This covers both the fresh-login path (where signInWithEmail already set it)
+  // and the page-reload path (where only the token was in localStorage).
+  if(!currentUser?.email){
+    try {
+      const meRes = await fetch('/api/auth/me', {
+        headers: { 'Authorization': `Bearer ${idToken}` }
+      });
+      if(meRes.ok) currentUser = await meRes.json();
+    } catch(e){ console.warn('Could not fetch /api/auth/me:', e); }
+  }
+  hideAuthLoader();
+  document.getElementById('loginModal').style.display='none';
+  document.getElementById('appShell').style.display='flex';
+  updateAuthUI();
+  initializePage();
+}
+
+function updateAuthUI(){
+  const email = currentUser?.email || '';
+  if(email){
+    document.getElementById('adminEmailTop').textContent = email;
+    const init = avatarInitial(email);
+    const el = document.getElementById('userAvatarInitial');
+    el.textContent = init;
+    el.style.background = avatarColor(email);
+  }
+}
+
+function enforceAuthOrLogout(){
+  if(!idToken){ logoutAndShowLogin(); return false; }
+  return true;
+}
+
+function logoutAndShowLogin(){
+  clearToken(); currentUser = null; allUsers = [];
+  showLoginModal();
+}
+
+function initPasswordToggle(){
+  const btn = document.getElementById('togglePasswordBtn');
+  const inp = document.getElementById('adminPassword');
+  if(!btn||!inp) return;
+  btn.addEventListener('click', e=>{
+    e.preventDefault();
+    const show = inp.type==='password';
+    inp.type = show ? 'text' : 'password';
+    btn.querySelector('i').className = show ? 'far fa-eye' : 'far fa-eye-slash';
+  });
+}
+
+function showLoadingState(show){
+  document.getElementById('loginForm').classList.toggle('hidden', show);
+  document.getElementById('loadingState').classList.toggle('hidden', !show);
+  const btn = document.getElementById('loginBtn');
+  if(btn) btn.disabled = show;
+}
+function showLoginError(msg){
+  const el = document.getElementById('loginError');
+  el.textContent = msg; el.classList.remove('hidden');
+  setTimeout(()=>el.classList.add('hidden'), 5000);
+}
+
+/**
+ * Signs in using the Neon DB email/password auth endpoint.
+ * On success, stores the returned JWT in localStorage and proceeds
+ * to verify admin access via /api/admin/verify.
+ */
+async function signInWithEmail(email, password){
+  try {
+    showLoadingState(true);
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Authentication failed');
+    // Store the JWT and set currentUser from the response payload.
+    saveToken(data.token);
+    currentUser = { id: data.id, email: data.email, isAdmin: data.isAdmin };
+    await onAuthSuccess();
+    showToast('Signed in successfully!', 'success');
+  } catch(error){
+    let msg = error.message || 'Authentication failed';
+    if(msg.toLowerCase().includes('invalid')) msg = 'Invalid email or password';
+    showLoginError(msg);
+  } finally { showLoadingState(false); }
+}
+
+/** Google OAuth is not available — Neon DB auth uses email/password only. */
+async function signInWithGoogle(){
+  showLoginError('Google sign-in is not available. Please use your email and password.');
+}
+
+/** Clears the stored JWT and returns to the login screen. */
+async function signOut(){
+  clearToken();
+  currentUser = null;
+  allUsers = [];
+  showLoginModal();
+  showToast('Signed out', 'success');
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// TOAST SYSTEM
+// ═══════════════════════════════════════════════════════════════════════
+function showToast(msg, type='success'){
+  const icons = {success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle'};
+  const el = document.createElement('div');
+  el.className = `toast toast--${type}`;
+  el.innerHTML = `<i class="fas ${icons[type]||icons.success}"></i><span>${msg}</span>`;
+  document.getElementById('toastContainer').appendChild(el);
+  setTimeout(()=>{ el.style.animation='toastIn .28s cubic-bezier(.16,1,.3,1) reverse both'; setTimeout(()=>el.remove(),300); }, type==='error'?4000:3000);
+}
+function showSuccessNotification(msg){ showToast(msg,'success'); }
+function showErrorNotification(msg){ showToast(msg,'error'); }
+
+function showDataSpinner(){ document.getElementById('dataSpinner').classList.remove('hidden'); }
+function hideDataSpinner(){ document.getElementById('dataSpinner').classList.add('hidden'); }
+
+// ═══════════════════════════════════════════════════════════════════════
+// SUPABASE API CALLS
+// ═══════════════════════════════════════════════════════════════════════
+async function fetchUsers(page=1){
+  if(!currentUser||!idToken) throw new Error('Not authenticated');
+  showDataSpinner();
+  try {
+    const r = await fetch(`/api/admin/users?page=${page}&limit=${pageSize}`,{headers:{'Authorization':`Bearer ${idToken}`}});
+    if(!r.ok){ const e=await r.json(); throw new Error(e.error||'Failed to fetch users'); }
+    const resp = await r.json();
+    totalUsersCount = resp.pagination?.total || 0;
+    hideDataSpinner();
+    return (resp.users||[]).map(u=>({
+      id: u.id, email: u.email||'',
+      name: u.full_name||u.name||'Unknown',
+      company: u.companyName||'', phone: u.companyPhone||u.phone||'',
+      tier: u.license?.tier||u.tier||'free', isAdmin: u.isAdmin||false,
+      deviceLimit: u.license?.device_limit||2,
+      licenseKey: u.license?.license_key||'N/A',
+      licenseActive: u.license?.is_active||false,
+      devices: u.license?.devices_used||0,
+      licenseId: u.license?.id||null,
+      createdAt: u.created_at||u.createdAt,
+      contractsLicense: u.contractsLicense||null
+    }));
+  } catch(e){ hideDataSpinner(); throw e; }
+}
+
+async function onPageChange(newPage){
+  currentPage = newPage;
+  if(['users'].includes(currentView)){
+    showDataSpinner();
+    try { allUsers = await fetchUsers(currentPage); }
+    catch(e){ showToast('Failed to load page: '+e.message,'error'); }
+    finally { hideDataSpinner(); }
+  }
+  renderCurrentView();
+}
+
+async function fetchStats(){
+  try {
+    const r = await fetch('/api/admin/stats',{headers:{'Authorization':`Bearer ${idToken}`}});
+    if(!r.ok) throw new Error('Failed to fetch stats');
+    return await r.json();
+  } catch(e){ console.error('Stats error:',e); return {totalUsers:0,activeLicenses:0,pendingPayments:0,quotesToday:0}; }
+}
+
+async function deactivateLicense(licenseId, reason){
+  try {
+    const r = await fetch('/api/admin/deactivate-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId,reason:reason||'Blocked by admin'})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed to deactivate');
+    showToast('License deactivated','success'); await initializePage(); return {success:true};
+  } catch(e){ showToast('Failed to deactivate: '+e.message,'error'); return {success:false}; }
+}
+
+async function activateLicenseFunc(userId){
+  try {
+    const user = allUsers.find(u=>u.id===userId);
+    if(!user||!user.licenseId) throw new Error('No license found');
+    const r = await fetch('/api/admin/activate-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId:user.licenseId})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed to activate');
+    showToast('License activated','success'); await initializePage(); return {success:true};
+  } catch(e){ showToast('Failed to activate: '+e.message,'error'); return {success:false}; }
+}
+
+async function deleteUserFunc(userId){
+  try {
+    const r = await fetch('/api/admin/delete-user',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({userId})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed to delete');
+    showToast('User deleted','success'); closeModal(); await initializePage(); return {success:true};
+  } catch(e){ showToast('Failed to delete: '+e.message,'error'); return {success:false}; }
+}
+
+async function updateLicense(userId, tier){
+  if(!currentUser||!idToken) throw new Error('Not authenticated');
+  try {
+    const u = allUsers.find(u=>u.id===userId);
+    if(!u) throw new Error('User not found');
+    const r = await fetch('/api/admin/generate-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({userName:u.name,userEmail:u.email,tier})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed to update license');
+    showToast(`License updated for ${u.name}!`,'success');
+    return {success:true, data:data.data};
+  } catch(e){ showToast('Failed to update license: '+e.message,'error'); return {success:false,error:e.message}; }
+}
+
+async function regenerateLicenseKey(licenseId){
+  try {
+    const r = await fetch('/api/admin/regenerate-license-key',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed to regenerate');
+    showToast('Key regenerated: '+data.data?.newLicenseKey,'success'); await initializePage(); return {success:true};
+  } catch(e){ showToast('Failed: '+e.message,'error'); return {success:false}; }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// UI RENDERING
+// ═══════════════════════════════════════════════════════════════════════
+const PAGE_TITLES = {users:'All Users','audit-log':'Audit Log',settings:'Settings & Tools'};
+const MENU_MAP    = {users:'menuTotalUsers','audit-log':'menuAuditLog',settings:'menuSettings'};
+
+function setActiveNav(view){
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.remove('active'));
+  const el = document.getElementById(MENU_MAP[view]);
+  if(el) el.classList.add('active');
+  const titleEl = document.getElementById('topbarPageTitle');
+  if(titleEl) titleEl.textContent = PAGE_TITLES[view]||'Dashboard';
+}
+
+async function updateStats(){
+  const stats = await fetchStats();
+  document.getElementById('statTotalUsers').textContent = stats.totalUsers??allUsers.length;
+  document.getElementById('statActiveLicenses').textContent = stats.activeLicenses??allUsers.filter(u=>u.licenseActive).length;
+  document.getElementById('statPendingPayments').textContent = stats.pendingPayments??0;
+  document.getElementById('statDevices').textContent = stats.quotesToday??0;
+}
+
+function renderCurrentView(){
+  if(!enforceAuthOrLogout()) return;
+  setActiveNav(currentView);
+  if(currentView==='users') renderUsersTable();
+  else if(currentView==='audit-log') renderAuditLogView();
+  else if(currentView==='settings') renderSettingsPanel();
+}
+
+function getPaginatedData(data){ const s=(currentPage-1)*pageSize; return data.slice(s,s+pageSize); }
+
+function tierBadge(tier){
+  const t=(tier||'free').toLowerCase();
+  if(t==='lifetime') return `<span class="badge badge--purple"><i class="fas fa-infinity"></i> Lifetime</span>`;
+  if(t==='pro')      return `<span class="badge badge--blue"><i class="fas fa-star"></i> Pro</span>`;
+  return `<span class="badge badge--muted">Free</span>`;
+}
+function statusBadge(active){
+  return active
+    ? `<span class="badge badge--green"><i class="fas fa-circle" style="font-size:.45rem"></i> Active</span>`
+    : `<span class="badge badge--red"><i class="fas fa-circle" style="font-size:.45rem"></i> Blocked</span>`;
+}
+
+function renderUsersTable(){
+  document.getElementById('panelTitle').innerHTML = '<i class="fas fa-users"></i> All Users <span style="font-size:.7rem;color:var(--text-muted);font-weight:400;margin-left:.3rem">click a row to manage</span>';
+  document.getElementById('dynamicTableHeader').innerHTML = `<th>User</th><th>Company</th><th>Phone</th><th>Tier</th><th>License Key</th><th>Devices</th><th>Status</th>`;
+  const users = allUsers.filter(u=>!u.isAdmin);
+  const tbody = document.getElementById('dynamicTableBody');
+  if(!users.length){ tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2.5rem;color:var(--text-muted)"><i class="fas fa-inbox" style="display:block;font-size:1.5rem;margin-bottom:.5rem;opacity:.4"></i>No users found</td></tr>'; }
+  else {
+    tbody.innerHTML = users.map(u=>`
+      <tr class="user-manage-row" data-userid="${u.id}" style="cursor:pointer;transition:background .12s">
+        <td>
+          <div class="user-row">
+            <div class="user-av" style="background:${avatarColor(u.email)}">${avatarInitial(u.name)}</div>
+            <div><div class="user-av-name">${escapeHtml(u.name)}</div><div class="user-av-email">${escapeHtml(u.email)}</div></div>
+          </div>
+        </td>
+        <td>${escapeHtml(u.company)||'<span style="color:var(--text-muted)">—</span>'}</td>
+        <td>${u.phone||'<span style="color:var(--text-muted)">—</span>'}</td>
+        <td>${tierBadge(u.tier)}</td>
+        <td><code class="license-key">${u.licenseKey}</code></td>
+        <td><span style="color:var(--text)">${u.devices||0}</span><span style="color:var(--text-muted)">/${u.deviceLimit}</span></td>
+        <td>${statusBadge(u.licenseActive)}</td>
+      </tr>`).join('');
+    document.querySelectorAll('.user-manage-row').forEach(row=>{
+      row.addEventListener('click',()=>{
+        const u = allUsers.find(u=>u.id===row.dataset.userid);
+        if(u) openManageModal(u);
+      });
+      row.addEventListener('mouseenter',()=>row.style.background='rgba(212,175,55,.06)');
+      row.addEventListener('mouseleave',()=>row.style.background='');
+    });
+  }
+  renderPagination(totalUsersCount);
+}
+
+function renderLicensesTable(){
+  document.getElementById('panelTitle').innerHTML = '<i class="fas fa-key"></i> License Inventory <span style="font-size:.7rem;color:var(--text-muted);font-weight:400;margin-left:.3rem">click row to manage</span>';
+  document.getElementById('dynamicTableHeader').innerHTML = `<th>User</th><th>License Key</th><th>Tier</th><th>Devices Used</th><th>Status</th>`;
+  const users = allUsers.filter(u=>!u.isAdmin);
+  const tbody = document.getElementById('dynamicTableBody');
+  tbody.innerHTML = users.map(u=>`
+    <tr class="license-row" data-licenseid="${u.id}" style="cursor:pointer">
+      <td>
+        <div class="user-row">
+          <div class="user-av" style="background:${avatarColor(u.email)}">${avatarInitial(u.name)}</div>
+          <div><div class="user-av-name">${escapeHtml(u.name)}</div><div class="user-av-email">${escapeHtml(u.email)}</div></div>
+        </div>
+      </td>
+      <td><code class="license-key">${u.licenseKey}</code></td>
+      <td>${tierBadge(u.tier)}</td>
+      <td><span style="color:var(--text)">${u.devices||0}</span><span style="color:var(--text-muted)">/${u.deviceLimit}</span></td>
+      <td>${statusBadge(u.licenseActive)}</td>
+    </tr>`).join('');
+  document.querySelectorAll('.license-row').forEach(row=>{
+    row.addEventListener('click',()=>{ const u=allUsers.find(u=>u.id===row.dataset.licenseid); if(u) openManageModal(u); });
+  });
+  renderPagination(totalUsersCount);
+}
+
+function renderLicenseGenerationTabs(){
+  document.getElementById('panelTitle').innerHTML = '<i class="fas fa-circle-plus"></i> Generate Licenses';
+  const panel = document.getElementById('dynamicPanel');
+  const tableSection = panel.querySelector('.overflow-x-auto')||panel.querySelector('[style*="overflow-x:auto"]');
+  const nonAdmin = allUsers.filter(u=>!u.isAdmin);
+  const paginated = nonAdmin;
+
+  const wrap = panel.querySelector('[style*="overflow-x"]')||panel.children[1];
+  if(!wrap) return;
+
+  wrap.innerHTML = `
+    <div style="padding:1.25rem 1.3rem 0">
+      <div class="tabs-container" id="licenseTabsContainer">
+        <button class="tab-button active" data-tab="license-gen"><i class="fas fa-key" style="margin-right:.45rem"></i>License Generation</button>
+        <button class="tab-button" data-tab="contracts-gen"><i class="fas fa-file-contract" style="margin-right:.45rem"></i>Contract License</button>
+      </div>
+    </div>
+    <div id="license-gen-content" class="tab-content active" style="overflow-x:auto">
+      <table class="data-table"><thead><tr><th>User</th><th>Email</th><th>Tier</th><th>License Key</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="licenseGenTableBody">${!paginated.length?'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted)">No users found</td></tr>':''}</tbody></table>
+    </div>
+    <div id="contracts-gen-content" class="tab-content" style="overflow-x:auto">
+      <table class="data-table"><thead><tr><th>User</th><th>Email</th><th>Company</th><th>Phone</th><th>Contract Status</th><th>Actions</th></tr></thead>
+      <tbody id="contractsGenTableBody">${!paginated.length?'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted)">No users found</td></tr>':''}</tbody></table>
+    </div>`;
+
+  document.getElementById('licenseGenTableBody').innerHTML = paginated.map(u=>`
+    <tr>
+      <td><div class="user-row"><div class="user-av" style="background:${avatarColor(u.email)}">${avatarInitial(u.name)}</div><div class="user-av-name">${escapeHtml(u.name)}</div></div></td>
+      <td style="color:var(--text-sub)">${escapeHtml(u.email)}</td>
+      <td>${tierBadge(u.tier)}</td>
+      <td><code class="license-key">${u.licenseKey}</code></td>
+      <td>${statusBadge(u.licenseActive)}</td>
+      <td><button class="action-btn" onclick="openGenerateLicenseModal('${u.id}','${escapeHtml(u.name)}')" ><i class="fas fa-plus"></i> Generate</button></td>
+    </tr>`).join('');
+
+  document.getElementById('contractsGenTableBody').innerHTML = paginated.map(u=>{
+    const has = u.contractsLicense&&u.contractsLicense.active;
+    const expired = has&&u.contractsLicense.expiresAt&&new Date(u.contractsLicense.expiresAt.seconds?u.contractsLicense.expiresAt.seconds*1000:u.contractsLicense.expiresAt)<new Date();
+    let statusHTML = has
+      ? (expired ? '<span class="badge badge--red">Expired</span>' : '<span class="badge badge--green"><i class="fas fa-check"></i> Active</span>')
+      : '<span class="badge badge--amber"><i class="fas fa-clock"></i> Pending</span>';
+    return `<tr>
+      <td><div class="user-row"><div class="user-av" style="background:${avatarColor(u.email)}">${avatarInitial(u.name)}</div><div class="user-av-name">${escapeHtml(u.name)}</div></div></td>
+      <td style="color:var(--text-sub)">${escapeHtml(u.email)}</td>
+      <td>${escapeHtml(u.company)||'—'}</td>
+      <td>${u.phone||'—'}</td>
+      <td>${statusHTML}</td>
+      <td><button class="action-btn" onclick="openGenerateContractLicenseModal('${u.id}','${escapeHtml(u.name)}')">${has?'<i class="fas fa-redo"></i> Renew':'<i class="fas fa-plus"></i> Generate'}</button></td>
+    </tr>`;
+  }).join('');
+
+  renderPagination(totalUsersCount);
+  document.querySelectorAll('#licenseTabsContainer .tab-button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#licenseTabsContainer .tab-button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      document.getElementById(btn.dataset.tab+'-content').classList.add('active');
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SETTINGS PANEL
+// ═══════════════════════════════════════════════════════════════════════
+function renderSettingsPanel(){
+  document.getElementById('panelTitle').innerHTML = '<i class="fas fa-sliders"></i> Settings &amp; Tools';
+  document.getElementById('paginationControls').innerHTML = '';
+  const panel = document.getElementById('dynamicPanel');
+  const wrap = panel.querySelector('[style*="overflow-x"]')||panel.children[1];
+  if(!wrap) return;
+  wrap.innerHTML = `
+    <div style="padding:1.5rem">
+
+      <!-- Backup -->
+      <div class="settings-card settings-card--gold">
+        <div class="settings-card-hdr">
+          <div class="settings-card-icon settings-card-icon--gold"><i class="fas fa-database"></i></div>
+          <div>
+            <div class="settings-card-title">Database Backup</div>
+            <div class="settings-card-sub">Export all client data — one JSON file per client inside a zip</div>
+          </div>
+        </div>
+        <div class="settings-divider"></div>
+        <p style="font-size:.78rem;color:var(--text-sub);line-height:1.65;margin-bottom:1.1rem">
+          Includes each client's <strong style="color:var(--text)">profile</strong>, <strong style="color:var(--text)">license</strong>,
+          <strong style="color:var(--text)">quotes</strong>, <strong style="color:var(--text)">drafts</strong>,
+          <strong style="color:var(--text)">devices</strong>, and <strong style="color:var(--text)">activity log</strong>.
+          A <code class="license-key">summary.json</code> is also included.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem">
+          <button id="backupDownloadBtn" onclick="triggerBackupDownload()" style="display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.3rem;border-radius:var(--r);background:var(--grad-gold);color:#08080f;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:opacity .15s,transform .15s;box-shadow:0 4px 18px rgba(212,175,55,.28);font-family:inherit">
+            <i class="fas fa-download" id="backupDownloadIcon"></i>
+            <span id="backupDownloadText">Download Backup Now</span>
+          </button>
+          <button id="backupEmailBtn" onclick="triggerBackupEmail()" style="display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.3rem;border-radius:var(--r);background:var(--gold-soft);color:var(--gold);font-size:.82rem;font-weight:700;border:1px solid var(--border-gold);cursor:pointer;transition:all .15s;font-family:inherit">
+            <i class="fas fa-envelope" id="backupEmailIcon"></i>
+            <span id="backupEmailText">Send Backup to Email</span>
+          </button>
+        </div>
+        <div id="backupStatusMsg" style="display:none;margin-top:.9rem;padding:.55rem .9rem;border-radius:8px;font-size:.78rem"></div>
+      </div>
+
+      <!-- Auto backup info -->
+      <div class="settings-card">
+        <div class="settings-card-hdr">
+          <div class="settings-card-icon settings-card-icon--green"><i class="fas fa-clock"></i></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <div class="settings-card-title">Automatic Daily Backup</div>
+              <span class="badge badge--green" style="font-size:.6rem">Active</span>
+            </div>
+            <div class="settings-card-sub">Scheduled at 6:00 PM Africa/Harare every day</div>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-sub);line-height:1.65">
+          Make sure <code class="license-key">EMAIL_HOST</code>, <code class="license-key">EMAIL_USER</code>,
+          <code class="license-key">EMAIL_PASS</code>, and <code class="license-key">CREATOR_EMAIL</code> environment variables are configured.
+        </p>
+      </div>
+
+      <!-- Backup History -->
+      <div class="settings-card" style="padding:0;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;border-bottom:1px solid var(--border);background:var(--card)">
+          <div style="display:flex;align-items:center;gap:.6rem">
+            <div class="settings-card-icon settings-card-icon--blue" style="width:30px;height:30px;border-radius:8px;font-size:.75rem"><i class="fas fa-history"></i></div>
+            <span style="font-weight:700;font-size:.88rem">Backup History</span>
+            <span id="backupHistoryCount" class="badge badge--muted" style="font-size:.62rem">—</span>
+          </div>
+          <button onclick="loadBackupHistory()" style="display:inline-flex;align-items:center;gap:.35rem;padding:.32rem .75rem;border-radius:7px;background:transparent;color:var(--text-muted);font-size:.72rem;font-weight:600;border:1px solid var(--border-2);cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.borderColor='var(--border-gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border-2)';this.style.color='var(--text-muted)'">
+            <i class="fas fa-sync-alt" id="historyRefreshIcon"></i> Refresh
+          </button>
+        </div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+            <thead>
+              <tr>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--card-2);white-space:nowrap">Type</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--card-2)">Filename</th>
+                <th style="padding:.65rem 1rem;text-align:center;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--card-2);white-space:nowrap">Clients</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--card-2);white-space:nowrap">Date &amp; Time</th>
+              </tr>
+            </thead>
+            <tbody id="backupHistoryBody">
+              <tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:.78rem"><i class="fas fa-spinner fa-spin" style="margin-right:.4rem"></i>Loading history…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+  loadBackupHistory();
+}
+
+async function loadBackupHistory(){
+  const tbody = document.getElementById('backupHistoryBody');
+  const countBadge = document.getElementById('backupHistoryCount');
+  const refreshIcon = document.getElementById('historyRefreshIcon');
+  if(!tbody) return;
+  if(refreshIcon) refreshIcon.classList.add('fa-spin');
+  tbody.innerHTML='<tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:.78rem"><i class="fas fa-spinner fa-spin" style="margin-right:.4rem"></i>Loading history…</td></tr>';
+  try {
+    const r = await fetch('/api/admin/backup/history',{headers:{'Authorization':`Bearer ${idToken}`}});
+    if(!r.ok) throw new Error('Failed to load history');
+    const history = await r.json();
+    if(countBadge) countBadge.textContent = history.length;
+    if(!history.length){ tbody.innerHTML='<tr><td colspan="4" style="padding:2rem;text-align:center;color:var(--text-muted);font-size:.78rem"><i class="fas fa-inbox" style="margin-right:.4rem"></i>No backups recorded yet</td></tr>'; return; }
+    const cfg={download:{label:'Download',icon:'fa-download',cls:'badge--gold'},email:{label:'Email',icon:'fa-envelope',cls:'badge--blue'},scheduled:{label:'Scheduled',icon:'fa-clock',cls:'badge--green'}};
+    tbody.innerHTML = history.map((entry,idx)=>{
+      const c=cfg[entry.type]||cfg.download;
+      const d=entry.createdAt?new Date(entry.createdAt):null;
+      const rowBg = idx%2===0?'transparent':'rgba(255,255,255,.018)';
+      return `<tr style="background:${rowBg}" onmouseover="this.style.background='rgba(212,175,55,.04)'" onmouseout="this.style.background='${rowBg}'">
+        <td style="padding:.7rem 1rem;border-bottom:1px solid var(--border)"><span class="badge ${c.cls}"><i class="fas ${c.icon}"></i> ${c.label}</span></td>
+        <td style="padding:.7rem 1rem;border-bottom:1px solid var(--border)"><code class="license-key">${entry.filename||'—'}</code></td>
+        <td style="padding:.7rem 1rem;border-bottom:1px solid var(--border);text-align:center"><strong style="color:var(--text)">${entry.clientCount??'—'}</strong></td>
+        <td style="padding:.7rem 1rem;border-bottom:1px solid var(--border);white-space:nowrap">
+          <span style="color:var(--text);font-weight:500">${d?d.toLocaleDateString():''}</span>
+          <span style="color:var(--text-muted);margin-left:.35rem;font-size:.74rem">${d?d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):''}</span>
+        </td>
+      </tr>`;
+    }).join('');
+  } catch(e){
+    tbody.innerHTML=`<tr><td colspan="4" style="padding:1.5rem;text-align:center;color:#fca5a5;font-size:.78rem"><i class="fas fa-exclamation-circle" style="margin-right:.35rem"></i>${e.message}</td></tr>`;
+  } finally { if(refreshIcon) refreshIcon.classList.remove('fa-spin'); }
+}
+
+async function triggerBackupDownload(){
+  const btn=document.getElementById('backupDownloadBtn'),icon=document.getElementById('backupDownloadIcon'),text=document.getElementById('backupDownloadText'),status=document.getElementById('backupStatusMsg');
+  btn.disabled=true;btn.style.opacity='.65';icon.className='fas fa-spinner fa-spin';text.textContent='Generating…';status.style.display='none';
+  try {
+    const r=await fetch('/api/admin/backup/download',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`}});
+    if(!r.ok){const e=await r.json();throw new Error(e.error||'Failed');}
+    const cd=r.headers.get('Content-Disposition')||'';
+    const fn=(cd.match(/filename="(.+?)"/))?.[1]||'backup.zip';
+    const cc=r.headers.get('X-Client-Count')||'?';
+    const blob=await r.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    status.style.cssText='display:block;margin-top:.9rem;padding:.55rem .9rem;border-radius:8px;font-size:.78rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#86efac';
+    status.innerHTML=`<i class="fas fa-check-circle" style="margin-right:.35rem"></i>Downloaded: <strong>${fn}</strong> (${cc} clients)`;
+    icon.className='fas fa-check';text.textContent='Downloaded!';
+    setTimeout(()=>{icon.className='fas fa-download';text.textContent='Download Backup Now';btn.disabled=false;btn.style.opacity='1';},3000);
+  } catch(e){
+    status.style.cssText='display:block;margin-top:.9rem;padding:.55rem .9rem;border-radius:8px;font-size:.78rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5';
+    status.innerHTML=`<i class="fas fa-exclamation-circle" style="margin-right:.35rem"></i>${e.message}`;
+    icon.className='fas fa-download';text.textContent='Download Backup Now';btn.disabled=false;btn.style.opacity='1';
+  }
+}
+
+async function triggerBackupEmail(){
+  const btn=document.getElementById('backupEmailBtn'),icon=document.getElementById('backupEmailIcon'),text=document.getElementById('backupEmailText'),status=document.getElementById('backupStatusMsg');
+  btn.disabled=true;btn.style.opacity='.65';icon.className='fas fa-spinner fa-spin';text.textContent='Sending…';status.style.display='none';
+  try {
+    const r=await fetch('/api/admin/backup/send-email',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'}});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed');
+    status.style.cssText='display:block;margin-top:.9rem;padding:.55rem .9rem;border-radius:8px;font-size:.78rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#86efac';
+    status.innerHTML=`<i class="fas fa-check-circle" style="margin-right:.35rem"></i>${data.message}`;
+    icon.className='fas fa-check';text.textContent='Sent!';
+    setTimeout(()=>{icon.className='fas fa-envelope';text.textContent='Send Backup to Email';btn.disabled=false;btn.style.opacity='1';},3500);
+  } catch(e){
+    status.style.cssText='display:block;margin-top:.9rem;padding:.55rem .9rem;border-radius:8px;font-size:.78rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5';
+    status.innerHTML=`<i class="fas fa-exclamation-circle" style="margin-right:.35rem"></i>${e.message}`;
+    icon.className='fas fa-envelope';text.textContent='Send Backup to Email';btn.disabled=false;btn.style.opacity='1';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// PAGINATION
+// ═══════════════════════════════════════════════════════════════════════
+function renderPagination(total){
+  const pages=Math.ceil(total/pageSize), cont=document.getElementById('paginationControls');
+  if(pages<=1){cont.innerHTML='';return;}
+  let h=`<button class="prev-page"><i class="fas fa-chevron-left"></i></button>`;
+  const startPage=Math.max(1,Math.min(currentPage-2,pages-4));
+  for(let i=startPage;i<=Math.min(startPage+4,pages);i++) h+=`<button class="page-num ${i===currentPage?'active-page':''}" data-page="${i}">${i}</button>`;
+  if(pages>startPage+4) h+=`<span style="color:var(--text-muted);padding:0 .2rem">…</span><button class="page-num" data-page="${pages}">${pages}</button>`;
+  h+=`<button class="next-page"><i class="fas fa-chevron-right"></i></button>`;
+  cont.innerHTML=h;
+  cont.querySelectorAll('.page-num').forEach(b=>b.addEventListener('click',()=>onPageChange(parseInt(b.dataset.page))));
+  cont.querySelector('.prev-page')?.addEventListener('click',()=>{if(currentPage>1) onPageChange(currentPage-1);});
+  cont.querySelector('.next-page')?.addEventListener('click',()=>{if(currentPage<pages) onPageChange(currentPage+1);});
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════════════════════════════════
+function openManageModal(user){
+  const modal = document.getElementById('actionModal');
+  modal.classList.remove('hidden');
+  document.getElementById('modalBodyContent').style.padding = '0';
+  document.getElementById('modalTitle').innerHTML=`<i class="fas fa-user-cog"></i> ${escapeHtml(user.name)}`;
+
+  const contractsActive = user.contractsLicense && user.contractsLicense.active;
+  const licenseActive   = user.licenseActive;
+
+  document.getElementById('modalBodyContent').innerHTML=`
+    <!-- User profile strip -->
+    <div style="display:flex;align-items:center;gap:.85rem;padding:1rem 1.4rem;border-bottom:1px solid var(--border)">
+      <div class="user-av" style="width:44px;height:44px;font-size:.95rem;flex-shrink:0;background:${avatarColor(user.email)}">${avatarInitial(user.name)}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;color:var(--text);font-size:.9rem">${escapeHtml(user.name)}</div>
+        <div style="font-size:.75rem;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(user.email)}</div>
+      </div>
+    </div>
+    <!-- Badge row -->
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;padding:.8rem 1.4rem;border-bottom:1px solid var(--border)">
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Tier</span>
+        ${tierBadge(user.tier)}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">License</span>
+        ${statusBadge(licenseActive)}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Contracts</span>
+        ${contractsActive
+          ? '<span class="badge badge--green"><i class="fas fa-circle" style="font-size:.45rem"></i> Active</span>'
+          : '<span class="badge badge--muted">—</span>'}
+      </div>
+      ${user.licenseKey && user.licenseKey!=='N/A' ? `
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">License Key</span>
+        <code class="license-key" style="font-size:.68rem">${user.licenseKey}</code>
+      </div>` : ''}
+    </div>
+    <!-- Action buttons -->
+    <div style="display:flex;flex-direction:column;gap:.5rem;padding:1rem 1.4rem">
+      <button onclick="openManageLicenseModal('${user.id}')" class="opts-btn opts-btn--primary">
+        <i class="fas fa-id-card"></i> Manage License &amp; Contracts
+      </button>
+      ${licenseActive
+        ? `<button onclick="blockLicense('${user.id}')" class="opts-btn opts-btn--danger"><i class="fas fa-ban"></i> Block License</button>`
+        : `<button onclick="activateLicense('${user.id}')" class="opts-btn opts-btn--success"><i class="fas fa-circle-check"></i> Activate License</button>`}
+      ${user.licenseKey && user.licenseKey!=='N/A' ? `
+      <button onclick="regenKeyFromOptions('${user.id}')" class="opts-btn opts-btn--secondary"><i class="fas fa-rotate"></i> Regenerate License Key</button>` : ''}
+      <button onclick="deleteUserConfirm('${user.id}','${escapeHtml(user.name)}')" class="opts-btn opts-btn--danger"><i class="fas fa-trash"></i> Delete User</button>
+    </div>`;
+
+  const footer = document.querySelector('#actionModal .modal-footer');
+  if(footer) footer.style.display = 'none';
+  document.getElementById('closeModalBtn').onclick = closeModal;
+}
+
+async function regenKeyFromOptions(userId){
+  const user = allUsers.find(u=>u.id===userId);
+  if(!user) return;
+  if(!confirm('Generate a new license key for '+user.name+'? The old key will stop working immediately.')) return;
+  try{
+    const r = await fetch('/api/admin/regenerate-license-key',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId:user.id})});
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.error||'Failed');
+    showToast('License key regenerated!','success');
+    closeModal();
+    allUsers = await fetchUsers(currentPage);
+    renderCurrentView();
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+
+function openManageLicenseModal(userId){
+  const user = allUsers.find(u=>u.id===userId);
+  if(!user) return;
+  const contractsActive = user.contractsLicense && user.contractsLicense.active;
+  const contractsExpiry = contractsActive && user.contractsLicense.expiresAt
+    ? new Date(user.contractsLicense.expiresAt.seconds ? user.contractsLicense.expiresAt.seconds*1000 : user.contractsLicense.expiresAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+    : null;
+
+  document.getElementById('modalBodyContent').style.padding = '0';
+  document.getElementById('modalTitle').innerHTML=`<i class="fas fa-key"></i> Manage License &mdash; ${escapeHtml(user.name)}`;
+
+  document.getElementById('modalBodyContent').innerHTML=`
+    <!-- Tab bar -->
+    <div style="display:flex;border-bottom:1.5px solid var(--border)">
+      <button class="mlm-tab mlm-tab--active" data-tab="license" onclick="mlmSwitchTab('license')">
+        <i class="fas fa-key"></i> License
+      </button>
+      <button class="mlm-tab" data-tab="contracts" onclick="mlmSwitchTab('contracts')">
+        <i class="fas fa-file-contract"></i> Contracts
+      </button>
+    </div>
+
+    <!-- ── LICENSE TAB ─────────────────────── -->
+    <div id="mlm-license" class="mlm-pane">
+
+      <!-- Current status -->
+      <div class="info-block" style="margin-bottom:.9rem">
+        <div class="info-block-title">Current License</div>
+        ${user.licenseKey && user.licenseKey!=='N/A' ? `
+        <div class="info-row"><span class="lk">Key</span><span class="lv"><code class="license-key">${user.licenseKey}</code></span></div>
+        <div class="info-row"><span class="lk">Tier</span><span class="lv">${tierBadge(user.tier)}</span></div>
+        <div class="info-row"><span class="lk">Status</span><span class="lv">${statusBadge(user.licenseActive)}</span></div>
+        <div class="info-row"><span class="lk">Devices</span><span class="lv">${user.devices||0} / ${user.deviceLimit}</span></div>
+        ` : `<p style="color:var(--text-muted);font-size:.78rem;margin:.4rem 0">No license yet — generate one below.</p>`}
+      </div>
+
+      <!-- Generate / Change Tier -->
+      <div class="info-block" style="margin-bottom:.9rem">
+        <div class="info-block-title">${user.licenseKey && user.licenseKey!=='N/A' ? 'Change Tier / Regenerate' : 'Generate License'}</div>
+        <div class="form-group" style="margin-bottom:.7rem">
+          <label>License Tier</label>
+          <select id="mlmTier">
+            <option value="free" ${user.tier==='free'?'selected':''}>Free — 2 devices</option>
+            <option value="pro"  ${user.tier==='pro'?'selected':''}>Pro — 5 devices</option>
+            <option value="lifetime" ${user.tier==='lifetime'?'selected':''}>Lifetime — 10 devices</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-confirm" style="flex:1" onclick="mlmGenerateLicense('${user.id}')">
+            <i class="fas fa-${user.licenseKey && user.licenseKey!=='N/A' ? 'rotate':'plus'}"></i>
+            ${user.licenseKey && user.licenseKey!=='N/A' ? 'Update License' : 'Generate License'}
+          </button>
+          ${user.licenseKey && user.licenseKey!=='N/A' ? `
+          <button class="btn-cancel" style="min-width:0" onclick="mlmRegenKey('${user.id}')">
+            <i class="fas fa-key"></i> New Key Only
+          </button>` : ''}
+        </div>
+      </div>
+
+      <!-- Mark payment paid -->
+      ${user.licenseKey && user.licenseKey!=='N/A' ? `
+      <div class="info-block">
+        <div class="info-block-title">Confirm Payment</div>
+        <div class="form-group" style="margin-bottom:.6rem">
+          <label>Amount (USD)</label>
+          <input type="number" id="mlmPayAmt" min="0" step="0.01" placeholder="e.g. 25.00">
+        </div>
+        <div class="form-group" style="margin-bottom:.6rem">
+          <label>Method</label>
+          <select id="mlmPayMethod">
+            <option>EcoCash</option><option>Bank Transfer</option><option>Cash</option>
+            <option>InnBucks</option><option>OneMoney</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:.7rem">
+          <label>Reference / Note</label>
+          <input type="text" id="mlmPayRef" placeholder="Transaction ID or note">
+        </div>
+        <button class="btn-confirm" style="width:100%" onclick="mlmMarkPaid('${user.id}')">
+          <i class="fas fa-circle-dollar-to-slot"></i> Mark as Paid &amp; Activate
+        </button>
+      </div>` : ''}
+    </div>
+
+    <!-- ── CONTRACTS TAB ────────────────────── -->
+    <div id="mlm-contracts" class="mlm-pane" style="display:none">
+
+      <!-- Current contracts status -->
+      <div class="info-block" style="margin-bottom:.9rem">
+        <div class="info-block-title">Contracts License Status</div>
+        ${contractsActive ? `
+        <div class="info-row"><span class="lk">Status</span><span class="lv"><span class="badge badge--green"><i class="fas fa-circle" style="font-size:.45rem"></i> Active</span></span></div>
+        <div class="info-row"><span class="lk">Granted</span><span class="lv">${user.contractsLicense.purchasedAt ? new Date(user.contractsLicense.purchasedAt.seconds ? user.contractsLicense.purchasedAt.seconds*1000 : user.contractsLicense.purchasedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—'}</span></div>
+        <div class="info-row"><span class="lk">Expires</span><span class="lv">${contractsExpiry || 'Never (Lifetime)'}</span></div>
+        ` : `<p style="color:var(--text-muted);font-size:.78rem;margin:.4rem 0">No contracts license — grant one below to enable the Contracts module for this user.</p>`}
+      </div>
+
+      <!-- Grant / Renew contracts -->
+      <div class="info-block" style="margin-bottom:.9rem">
+        <div class="info-block-title">${contractsActive ? 'Renew / Extend' : 'Grant Contracts License'}</div>
+        <div class="form-group" style="margin-bottom:.7rem">
+          <label>Expiry Date <span style="color:var(--text-muted);font-weight:400;font-size:.75em">(leave blank for lifetime access)</span></label>
+          <input type="date" id="mlmContractExpiry">
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn-confirm" style="flex:1" onclick="mlmGrantContracts('${user.id}')">
+            <i class="fas fa-file-contract"></i> ${contractsActive ? 'Renew Contracts License' : 'Grant Contracts License'}
+          </button>
+          ${contractsActive ? `
+          <button class="btn-cancel" style="color:#f87171;border-color:#f8717140" onclick="mlmRevokeContracts('${user.id}')">
+            <i class="fas fa-ban"></i> Revoke
+          </button>` : ''}
+        </div>
+      </div>
+
+      <div style="padding:.8rem .9rem;border-radius:.5rem;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.18);color:var(--text-muted);font-size:.76rem;line-height:1.6">
+        <strong style="color:var(--text)">What is the Contracts License?</strong><br>
+        Enables the Contracts module — lets the user create, sign, and manage client contracts inside AydQuoteMaker.
+      </div>
+    </div>`;
+
+  const footer = document.querySelector('#actionModal .modal-footer');
+  if(footer){ footer.style.display='flex'; footer.innerHTML=`<button class="btn-cancel" onclick="openManageModal(allUsers.find(u=>u.id==='${user.id}'))"><i class="fas fa-arrow-left"></i> Back</button>`; }
+}
+
+function mlmSwitchTab(tab){
+  document.querySelectorAll('.mlm-tab').forEach(b=>b.classList.toggle('mlm-tab--active', b.dataset.tab===tab));
+  document.querySelectorAll('.mlm-pane').forEach(p=>p.style.display='none');
+  const pane = document.getElementById('mlm-'+tab);
+  if(pane) pane.style.display='block';
+}
+
+async function mlmGenerateLicense(userId){
+  const tier = document.getElementById('mlmTier')?.value||'pro';
+  const result = await updateLicense(userId, tier);
+  if(result.success){ allUsers=await fetchUsers(currentPage); openManageLicenseModal(userId); }
+}
+
+async function mlmRegenKey(userId){
+  if(!confirm('Generate a new license key? The old key will stop working immediately.')) return;
+  try{
+    const r=await fetch('/api/admin/regenerate-license-key',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId:userId})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Failed');
+    showToast('License key regenerated!','success');
+    allUsers=await fetchUsers(currentPage);
+    openManageLicenseModal(userId);
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+
+async function mlmMarkPaid(userId){
+  const amt = document.getElementById('mlmPayAmt')?.value;
+  if(!amt||isNaN(Number(amt))){ showToast('Enter a valid payment amount','error'); return; }
+  const method = document.getElementById('mlmPayMethod')?.value||'EcoCash';
+  const ref    = document.getElementById('mlmPayRef')?.value||'';
+  try{
+    const r=await fetch('/api/admin/mark-paid',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({licenseId:userId,amount:Number(amt),paymentMethod:method,paymentReference:ref})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Failed');
+    showToast('Payment confirmed &amp; license activated!','success');
+    allUsers=await fetchUsers(currentPage);
+    openManageLicenseModal(userId);
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+
+async function mlmGrantContracts(userId){
+  const expiry = document.getElementById('mlmContractExpiry')?.value||null;
+  try{
+    const r=await fetch('/api/admin/grant-contracts-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({userId,expiresAt:expiry||null})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Failed');
+    const user=allUsers.find(u=>u.id===userId);
+    showToast(`Contracts license granted to ${user?.name||'user'}!`,'success');
+    allUsers=await fetchUsers(currentPage);
+    openManageLicenseModal(userId);
+    mlmSwitchTab('contracts');
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+
+async function mlmRevokeContracts(userId){
+  const user=allUsers.find(u=>u.id===userId);
+  if(!confirm(`Revoke contracts license for ${user?.name||'this user'}?`)) return;
+  try{
+    const r=await fetch('/api/admin/revoke-contracts-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({userId})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Failed');
+    showToast('Contracts license revoked.','success');
+    allUsers=await fetchUsers(currentPage);
+    openManageLicenseModal(userId);
+    mlmSwitchTab('contracts');
+  }catch(e){ showToast('Error: '+e.message,'error'); }
+}
+
+function openGenerateLicenseModal(userId, userName){
+  const user = allUsers.find(u=>u.id===userId);
+  if(!user) return;
+  document.getElementById('actionModal').classList.remove('hidden');
+  document.getElementById('modalTitle').innerHTML=`<i class="fas fa-key"></i> Generate License for ${escapeHtml(userName)}`;
+  document.getElementById('modalBodyContent').innerHTML=`
+    <div class="info-block">
+      <div class="info-block-title">User Information</div>
+      <div class="info-row"><span class="lk">Email</span><span class="lv">${escapeHtml(user.email)}</span></div>
+      <div class="info-row"><span class="lk">Company</span><span class="lv">${escapeHtml(user.company)||'—'}</span></div>
+      <div class="info-row"><span class="lk">Phone</span><span class="lv">${user.phone||'—'}</span></div>
+    </div>
+    <div class="form-group">
+      <label for="modalGenUserTier">License Tier</label>
+      <select id="modalGenUserTier">
+        <option value="free">Free Tier — 2 devices</option>
+        <option value="pro" selected>Pro Tier — 5 devices</option>
+        <option value="lifetime">Lifetime Tier — 10 devices</option>
+      </select>
+    </div>`;
+  const footer=document.querySelector('.flex.gap-3.mt-6.justify-end');
+  if(footer) footer.innerHTML=`
+    <button id="modalCancelBtn" class="btn-cancel">Cancel</button>
+    <button onclick="confirmGenerateLicense('${userId}')" class="btn-confirm"><i class="fas fa-plus" style="margin-right:.35rem"></i>Generate License</button>`;
+  document.getElementById('modalCancelBtn')?.addEventListener('click', closeModal);
+}
+
+async function confirmGenerateLicense(userId){
+  const tier=document.getElementById('modalGenUserTier').value;
+  const result=await updateLicense(userId,tier);
+  if(result.success){closeModal();await initializePage();}
+}
+
+function openGenerateContractLicenseModal(userId, userName){
+  const user=allUsers.find(u=>u.id===userId);
+  if(!user) return;
+  document.getElementById('actionModal').classList.remove('hidden');
+  document.getElementById('modalTitle').innerHTML=`<i class="fas fa-file-contract"></i> Grant Contract License — ${escapeHtml(userName)}`;
+  document.getElementById('modalBodyContent').innerHTML=`
+    <div class="info-block">
+      <div class="info-block-title">User Information</div>
+      <div class="info-row"><span class="lk">Email</span><span class="lv">${escapeHtml(user.email)}</span></div>
+      <div class="info-row"><span class="lk">Company</span><span class="lv">${escapeHtml(user.company)||'—'}</span></div>
+      <div class="info-row"><span class="lk">Phone</span><span class="lv">${user.phone||'—'}</span></div>
+    </div>
+    <div class="form-group">
+      <label for="modalContractExpiryDate">Expiry Date <span style="color:var(--text-muted);font-weight:400;font-size:.75em">(optional — leave blank for lifetime)</span></label>
+      <input type="date" id="modalContractExpiryDate">
+    </div>`;
+  const footer=document.querySelector('.flex.gap-3.mt-6.justify-end');
+  if(footer) footer.innerHTML=`
+    <button id="modalCancelBtn" class="btn-cancel">Cancel</button>
+    <button onclick="confirmGenerateContractLicense('${userId}')" class="btn-confirm"><i class="fas fa-check" style="margin-right:.35rem"></i>Grant License</button>`;
+  document.getElementById('modalCancelBtn')?.addEventListener('click', closeModal);
+}
+
+async function confirmGenerateContractLicense(userId){
+  const expiry=document.getElementById('modalContractExpiryDate').value;
+  try {
+    const r=await fetch('/api/admin/grant-contracts-license',{method:'POST',headers:{'Authorization':`Bearer ${idToken}`,'Content-Type':'application/json'},body:JSON.stringify({userId,expiresAt:expiry||null})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Failed');
+    const user=allUsers.find(u=>u.id===userId);
+    showToast(`Contract license granted to ${user?.name||'user'}!`,'success');
+    closeModal();await initializePage();
+  } catch(e){ showToast('Failed: '+e.message,'error'); }
+}
+
+function toggleContractLicenseDisplay(userId){
+  const el=document.getElementById(`lic-${userId}`),icon=document.getElementById(`eye-${userId}`);
+  if(el.style.display==='none'){el.style.display='inline-block';icon.className='fas fa-eye-slash';}
+  else{el.style.display='none';icon.className='fas fa-eye';}
+}
+
+function closeModal(){ document.getElementById('actionModal').classList.add('hidden'); }
+function showGenerateModal(){ document.getElementById('generateLicenseModal').classList.remove('hidden'); populateUserDropdown(); }
+
+function populateUserDropdown(){
+  const sel=document.getElementById('genUserEmailSelect');
+  sel.innerHTML='<option value="">Choose a user…</option>';
+  allUsers.filter(u=>!u.isAdmin).forEach(u=>{
+    const o=document.createElement('option');o.value=u.id;o.textContent=`${u.email} — ${u.name}`;sel.appendChild(o);
+  });
+}
+
+function populateTabUserDropdown(){
+  const sel=document.getElementById('tabGenUserEmail');
+  if(!sel) return;
+  sel.innerHTML='<option value="">Choose a user…</option>';
+  allUsers.filter(u=>!u.isAdmin).forEach(u=>{
+    const o=document.createElement('option');o.value=u.id;o.textContent=`${u.email} — ${u.name}`;sel.appendChild(o);
+  });
+}
+
+function closeGenModal(){ document.getElementById('generateLicenseModal').classList.add('hidden'); }
+
+function blockLicense(userId){
+  if(confirm('Block this user\'s license?')){ deactivateLicense(userId,'Blocked by admin'); closeModal(); }
+}
+function activateLicense(userId){
+  if(confirm('Activate this license?')){ activateLicenseFunc(userId); closeModal(); }
+}
+function deleteUserConfirm(userId, userName){
+  if(confirm(`Delete user "${userName}"? This cannot be undone.`)){ deleteUserFunc(userId); }
+}
+
+function escapeHtml(str){
+  if(!str) return '';
+  return str.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+async function generateLicenseFromTab(){
+  const userId=document.getElementById('tabGenUserEmail')?.value;
+  const tier=document.getElementById('tabGenUserTier')?.value||'pro';
+  if(!userId){showToast('Select a user first','error');return;}
+  const result=await updateLicense(userId,tier);
+  if(result.success){
+    const el=document.getElementById('tabGenUserEmail');if(el) el.value='';
+    await initializePage();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════════════════════════════════════════
+async function initializePage(){
+  if(!enforceAuthOrLogout()) return;
+  showDataSpinner();
+  try { allUsers=await fetchUsers(currentPage); await updateStats(); renderCurrentView(); }
+  catch(e){ console.error('Init error:',e); showToast('Failed to load data','error'); }
+  finally { hideDataSpinner(); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// AUDIT LOG
+// ═══════════════════════════════════════════════════════════════════════
+let auditFilter = 'all';
+
+const AUDIT_LABELS = {
+  admin_login:              'Login',
+  admin_delete_user:        'Delete User',
+  admin_generate_license:   'Generate License',
+  admin_regenerate_key:     'Regenerate Key',
+  admin_activate_license:   'Activate License',
+  admin_deactivate_license: 'Deactivate License',
+  admin_mark_paid:          'Mark Paid',
+  admin_deactivate_device:  'Remove Device',
+  admin_whitelist_device:   'Whitelist Device',
+  admin_grant_contracts:    'Grant Contracts',
+  admin_revoke_contracts:   'Revoke Contracts',
+};
+
+const AUDIT_COLORS = {
+  admin_login:              'badge--blue',
+  admin_delete_user:        'badge--red',
+  admin_generate_license:   'badge--green',
+  admin_regenerate_key:     'badge--amber',
+  admin_activate_license:   'badge--green',
+  admin_deactivate_license: 'badge--red',
+  admin_mark_paid:          'badge--purple',
+  admin_deactivate_device:  'badge--amber',
+  admin_whitelist_device:   'badge--blue',
+  admin_grant_contracts:    'badge--green',
+  admin_revoke_contracts:   'badge--red',
+};
+
+const AUDIT_ICONS = {
+  admin_login:              'fa-right-to-bracket',
+  admin_delete_user:        'fa-user-minus',
+  admin_generate_license:   'fa-key',
+  admin_regenerate_key:     'fa-rotate',
+  admin_activate_license:   'fa-circle-check',
+  admin_deactivate_license: 'fa-ban',
+  admin_mark_paid:          'fa-circle-dollar-to-slot',
+  admin_deactivate_device:  'fa-laptop',
+  admin_whitelist_device:   'fa-shield-check',
+  admin_grant_contracts:    'fa-file-contract',
+  admin_revoke_contracts:   'fa-file-circle-xmark',
+};
+
+function auditBadge(action){
+  const label = AUDIT_LABELS[action] || action.replace('admin_','').replace(/_/g,' ');
+  const color = AUDIT_COLORS[action] || 'badge--muted';
+  const icon  = AUDIT_ICONS[action]  || 'fa-circle';
+  return `<span class="badge ${color}" style="white-space:nowrap"><i class="fas ${icon}" style="font-size:.55rem"></i> ${label}</span>`;
+}
+
+function relativeTime(iso){
+  const diff = Date.now() - new Date(iso).getTime();
+  const s = Math.floor(diff/1000), m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+  if(d>0) return `${d}d ago`;
+  if(h>0) return `${h}h ago`;
+  if(m>0) return `${m}m ago`;
+  return `${s}s ago`;
+}
+
+function formatDetailSummary(details, action){
+  if(!details) return '<span style="color:var(--text-muted)">—</span>';
+  if(action==='admin_mark_paid') return `$${details.amount||0} via ${details.paymentMethod||'—'}`;
+  if(action==='admin_deactivate_license'||action==='admin_activate_license') return escapeHtml(details.licenseKey||details.reason||'—');
+  if(action==='admin_generate_license') return `${escapeHtml(details.licenseKey||'')} · ${details.tier||''}`;
+  if(action==='admin_regenerate_key') return `${escapeHtml(details.newLicenseKey||'—')}`;
+  if(action==='admin_deactivate_device'||action==='admin_whitelist_device') return escapeHtml(details.deviceName||details.deviceId||'—');
+  return '<span style="color:var(--text-muted)">—</span>';
+}
+
+async function fetchAuditLogs(filter='all', page=1){
+  const res = await fetch(`/api/admin/audit-logs?filter=${filter}&page=${page}&limit=50`, {
+    headers: { 'Authorization': `Bearer ${idToken}` }
+  });
+  if(!res.ok) throw new Error('Failed to fetch audit logs');
+  return res.json();
+}
+
+async function renderAuditLogView(){
+  document.getElementById('panelTitle').innerHTML = '<i class="fas fa-shield-halved"></i> Audit Log';
+  document.getElementById('paginationControls').innerHTML = '';
+
+  const filterBtns = `
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+      ${[['all','All Time'],['today','Today'],['week','This Week'],['logins','Logins Only']].map(([f,l])=>`
+        <button onclick="setAuditFilter('${f}')" id="auditBtn_${f}" class="btn-filter ${auditFilter===f?'btn-filter--active':''}">${l}</button>
+      `).join('')}
+    </div>`;
+
+  document.querySelector('.panel-controls').innerHTML = filterBtns;
+  document.getElementById('dynamicTableHeader').innerHTML =
+    `<th style="width:110px">Time</th><th>Action</th><th>Admin</th><th>Target User</th><th>Details</th>`;
+
+  const tbody = document.getElementById('dynamicTableBody');
+  tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)"><div class="spin-ring" style="margin:0 auto .5rem;width:22px;height:22px;border-width:2px"></div>Loading…</td></tr>`;
+
+  try {
+    const data = await fetchAuditLogs(auditFilter, currentPage);
+    const logs = data.data || [];
+
+    if(!logs.length){
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2.5rem;color:var(--text-muted)"><i class="fas fa-clock-rotate-left" style="display:block;font-size:1.5rem;margin-bottom:.5rem;opacity:.35"></i>No audit events yet.<br><span style="font-size:.72rem">Actions you take in the dashboard will appear here.</span></td></tr>`;
+    } else {
+      tbody.innerHTML = logs.map(log=>{
+        const d = log.details || {};
+        const adminEmail = d.adminEmail || log.deviceName || '—';
+        const targetEmail = log.email || '<span style="color:var(--text-muted)">—</span>';
+        const ts = new Date(log.createdAt);
+        const timeStr = relativeTime(log.createdAt);
+        const absTime = ts.toLocaleString('en-ZW',{dateStyle:'short',timeStyle:'short'});
+        return `<tr>
+          <td title="${absTime}" style="font-size:.73rem;color:var(--text-muted);white-space:nowrap;cursor:default">${timeStr}<br><span style="font-size:.65rem">${absTime}</span></td>
+          <td>${auditBadge(log.action)}</td>
+          <td style="font-size:.78rem">${escapeHtml(adminEmail)}</td>
+          <td style="font-size:.78rem">${escapeHtml(String(targetEmail))}</td>
+          <td style="font-size:.75rem;color:var(--text-muted)">${formatDetailSummary(d, log.action)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    renderPagination(data.pagination?.total || 0);
+  } catch(e){
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:#f87171"><i class="fas fa-triangle-exclamation"></i> ${escapeHtml(e.message)}</td></tr>`;
+  }
+}
+
+function setAuditFilter(f){
+  auditFilter = f;
+  currentPage = 1;
+  renderAuditLogView();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// EVENT LISTENERS
+// ═══════════════════════════════════════════════════════════════════════
+document.getElementById('loginBtn')?.addEventListener('click',()=>{
+  const e=document.getElementById('adminEmail').value.trim(),p=document.getElementById('adminPassword').value;
+  if(e&&p) signInWithEmail(e,p); else showLoginError('Enter your email and password');
+});
+document.getElementById('googleLoginBtn')?.addEventListener('click', signInWithGoogle);
+document.getElementById('logoutTop')?.addEventListener('click', signOut);
+
+// Stat card nav
+document.getElementById('statTotalUsersBox')?.addEventListener('click',async()=>{currentView='users';await onPageChange(1);});
+
+
+// Sidebar nav
+document.getElementById('menuTotalUsers')?.addEventListener('click',async()=>{currentView='users';await onPageChange(1);closeSidebar();});
+document.getElementById('menuAuditLog')?.addEventListener('click',()=>{currentView='audit-log';currentPage=1;renderCurrentView();closeSidebar();});
+document.getElementById('menuSettings')?.addEventListener('click',()=>{currentView='settings';renderCurrentView();closeSidebar();});
+
+// Generate license modal
+document.getElementById('confirmGenLicense')?.addEventListener('click', async()=>{
+  const uid=document.getElementById('genUserEmailSelect').value, tier=document.getElementById('genUserTier').value;
+  if(!uid){showToast('Select a user first','error');return;}
+  const res=await updateLicense(uid,tier);
+  if(res.success){closeGenModal();document.getElementById('genUserEmailSelect').value='';document.getElementById('genUserTier').value='pro';await initializePage();}
+});
+document.getElementById('cancelGenModal')?.addEventListener('click', closeGenModal);
+document.getElementById('modalCancelBtn')?.addEventListener('click', closeModal);
+document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+document.getElementById('modalBackdrop')?.addEventListener('click', closeModal);
+document.getElementById('paginationSizeSelect')?.addEventListener('change',async e=>{
+  pageSize=parseInt(e.target.value); currentPage=1;
+  if(['users'].includes(currentView)){
+    showDataSpinner();
+    try { allUsers=await fetchUsers(1); } catch(e){}
+    finally { hideDataSpinner(); }
+  }
+  renderCurrentView();
+});
+
+// Sidebar
+const sidebar=document.getElementById('sidebar'), overlay=document.getElementById('sidebarOverlay');
+function openSidebar(){sidebar.classList.add('open');overlay.classList.add('active');}
+function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('active');}
+document.getElementById('hamburgerBtn')?.addEventListener('click', openSidebar);
+document.getElementById('closeSidebarBtn')?.addEventListener('click', closeSidebar);
+overlay?.addEventListener('click', closeSidebar);
+
+// DOMContentLoaded extras
+document.addEventListener('DOMContentLoaded',()=>{
+  initPasswordToggle();
+  document.getElementById('adminPassword')?.addEventListener('keypress',e=>{
+    if(e.key!=='Enter') return;
+    const em=document.getElementById('adminEmail').value.trim(),pw=document.getElementById('adminPassword').value;
+    if(em&&pw) signInWithEmail(em,pw); else showLoginError('Enter your email and password');
+  });
+  document.getElementById('adminEmail')?.addEventListener('keypress',e=>{
+    if(e.key==='Enter') document.getElementById('adminPassword').focus();
+  });
+});
+</script>
+</body>
+</html>

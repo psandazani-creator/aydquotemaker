@@ -1,0 +1,28 @@
+{
+  "name": "AydQuoteMaker - Professional Quotation Maker",
+  "short_name": "AydQuoteMaker",
+  "description": "Create, save and share professional quotes from anywhere — works fully offline.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#D4AF37",
+  "background_color": "#0A0A0A",
+  "categories": ["business", "finance", "productivity"],
+  "icons": [
+    {
+      "src": "/FullLogo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/FullLogo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

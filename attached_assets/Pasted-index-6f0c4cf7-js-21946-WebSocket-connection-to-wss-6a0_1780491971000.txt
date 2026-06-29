@@ -1,0 +1,53 @@
+index-6f0c4cf7.js:21946 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: WebSocket is closed before the connection is established.
+N @ index-6f0c4cf7.js:21946Understand this warning
+index-6f0c4cf7.js:21946 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: WebSocket is closed before the connection is established.
+N @ index-6f0c4cf7.js:21946Understand this warning
+index-6f0c4cf7.js:21946 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: WebSocket is closed before the connection is established.
+N @ index-6f0c4cf7.js:21946Understand this warning
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
+createSocket @ index-6f0c4cf7.js:21936Understand this error
+index-6f0c4cf7.js:21936 WebSocket connection to 'wss://6a0d6ca78d064eb85eea07fb.powersync.journeyapps.com/sync/stream' failed: 
