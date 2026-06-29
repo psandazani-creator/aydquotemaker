@@ -1,0 +1,332 @@
+/* src/components/Settings/SettingsPage.css */
+
+.settings-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Settings Header with Actions */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.settings-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.settings-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.action-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.action-icon:hover {
+  background: var(--bg-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-gold);
+}
+
+.action-icon.sign-out:hover {
+  background: var(--error);
+  border-color: var(--error);
+  color: white;
+  box-shadow: var(--shadow-gold);
+}
+
+/* Tooltip styles */
+.action-icon[data-tooltip] {
+  position: relative;
+}
+
+.action-icon[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: 8px;
+  z-index: 1000;
+}
+
+.action-icon[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--bg-elevated) transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: 2px;
+}
+
+.action-icon[data-tooltip]:hover::before,
+.action-icon[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+/* Two-column layout */
+.settings-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.settings-section {
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.settings-section:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.settings-two-columns .settings-section {
+  margin-bottom: 0;
+}
+
+.settings-section h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item label {
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 120px;
+}
+
+.setting-item span {
+  color: var(--text-secondary);
+  text-align: right;
+  word-break: break-word;
+}
+
+.setting-item select,
+.setting-item input,
+.setting-item textarea {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 250px;
+}
+
+body:not(.dark-mode) .setting-item select,
+body:not(.dark-mode) .setting-item input,
+body:not(.dark-mode) .setting-item textarea {
+  color: #000000;
+}
+
+body.dark-mode .setting-item select,
+body.dark-mode .setting-item input,
+body.dark-mode .setting-item textarea {
+  color: #f9fafb;
+}
+
+.setting-item textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.tier-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.tier-badge.free {
+  background: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+body:not(.dark-mode) .tier-badge.free {
+  color: #000000;
+}
+
+body.dark-mode .tier-badge.free {
+  color: #f9fafb;
+}
+
+.tier-badge.pro {
+  background: var(--gradient-gold);
+  color: var(--color-black);
+}
+
+.tier-badge.lifetime {
+  background: var(--success);
+  color: white;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+body:not(.dark-mode) .btn-secondary {
+  color: #000000;
+}
+
+body.dark-mode .btn-secondary {
+  color: #f9fafb;
+}
+
+.btn-secondary:hover {
+  background: var(--border-light);
+}
+
+.btn-error {
+  background: var(--error);
+  color: white;
+  border: none;
+}
+
+.btn-error:hover {
+  opacity: 0.9;
+}
+
+.logo-upload-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logo-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+
+.logo-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.setting-description {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 0 12px 0;
+}
+
+body:not(.dark-mode) .setting-description {
+  color: #404040;
+}
+
+body.dark-mode .setting-description {
+  color: #9ca3af;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .settings-two-columns {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .settings-page {
+    padding: 16px;
+  }
+
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .setting-item label {
+    min-width: auto;
+  }
+
+  .setting-item span {
+    text-align: left;
+  }
+
+  .setting-item select,
+  .setting-item input,
+  .setting-item textarea {
+    max-width: 100%;
+  }
+
+  .settings-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .settings-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

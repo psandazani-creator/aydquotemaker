@@ -1,0 +1,148 @@
+/* src/components/Contracts/ContractsPage.css */
+
+.contracts-page {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contracts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.contracts-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 28px;
+}
+
+.contracts-header .btn-primary {
+    padding: 12px 24px;
+    background: var(--color-gold);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.contracts-header .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 2px dashed var(--border-light);
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.empty-state .btn-primary {
+    padding: 12px 32px;
+    background: var(--color-gold);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.empty-state .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contracts-page {
+        padding: 16px;
+    }
+
+    .contracts-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .contracts-header .btn-primary {
+        width: 100%;
+    }
+}
+/* Pagination */
+.contracts-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0 8px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.contracts-pagination .pagination-info {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+.contracts-pagination .pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.contracts-pagination .pagination-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.contracts-pagination .pagination-btn:hover:not(:disabled) {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+.contracts-pagination .pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.contracts-pagination .page-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.contracts-pagination .page-btn.active {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: #08080f;
+    font-weight: 700;
+}

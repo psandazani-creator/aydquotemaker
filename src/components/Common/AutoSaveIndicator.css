@@ -1,0 +1,64 @@
+.autosave-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  user-select: none;
+}
+
+.autosave-indicator i {
+  font-size: 12px;
+}
+
+.autosave-pending {
+  color: var(--text-muted, #9ca3af);
+}
+
+.autosave-saving {
+  color: var(--color-gold, #d4af37);
+}
+
+.autosave-saved {
+  color: var(--success, #10b981);
+}
+
+.autosave-error {
+  color: var(--error, #ef4444);
+}
+
+/* Pulsing dot for pending */
+.autosave-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted, #9ca3af);
+  flex-shrink: 0;
+}
+
+.autosave-dot--pulse {
+  animation: autosave-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes autosave-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Spinner for saving */
+.autosave-spinner {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-top-color: var(--color-gold, #d4af37);
+  border-radius: 50%;
+  animation: autosave-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes autosave-spin {
+  to { transform: rotate(360deg); }
+}

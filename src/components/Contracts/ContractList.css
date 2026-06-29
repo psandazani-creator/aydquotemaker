@@ -1,0 +1,229 @@
+/* src/components/Contracts/ContractList.css */
+
+.contract-list {
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+.contract-table-header {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1.5fr;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-elevated);
+    border-bottom: 2px solid var(--border-light);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.contract-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1.5fr;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-light);
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.contract-row:hover {
+    background: var(--bg-elevated);
+}
+
+.contract-row:last-child {
+    border-bottom: none;
+}
+
+/* Column Styles */
+.col-title h4 {
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.col-title .sync-info {
+    margin: 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.col-receiver p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.col-receiver .email {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.col-date {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.col-status {
+    display: flex;
+    justify-content: center;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    min-width: 80px;
+}
+
+.status-badge.draft {
+    background: rgba(158, 158, 158, 0.2);
+    color: #9e9e9e;
+    border: 1px solid rgba(158, 158, 158, 0.3);
+}
+
+.status-badge.sent {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196f3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.status-badge.signed {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-badge.executed {
+    background: rgba(103, 58, 183, 0.2);
+    color: #673ab7;
+    border: 1px solid rgba(103, 58, 183, 0.3);
+}
+
+/* Actions */
+.col-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.action-btn.delete:hover {
+    border-color: #f44336;
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+
+    .contract-table-header,
+    .contract-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .contract-table-header {
+        display: none;
+    }
+
+    .contract-row {
+        display: block;
+    }
+
+    .col-title,
+    .col-receiver,
+    .col-date,
+    .col-status,
+    .col-actions {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .col-title:before,
+    .col-receiver:before,
+    .col-date:before,
+    .col-status:before,
+    .col-actions:before {
+        display: block;
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+    }
+
+    .col-title:before {
+        content: 'Title';
+    }
+
+    .col-receiver:before {
+        content: 'Receiver';
+    }
+
+    .col-date:before {
+        content: 'Created';
+    }
+
+    .col-status:before {
+        content: 'Status';
+    }
+
+    .col-actions:before {
+        content: 'Actions';
+    }
+
+    .col-status {
+        justify-content: flex-start;
+    }
+
+    .col-actions {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .contract-row {
+        padding: 12px;
+    }
+
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .col-title h4 {
+        font-size: 13px;
+    }
+
+    .col-receiver p {
+        font-size: 12px;
+    }
+}

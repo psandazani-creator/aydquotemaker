@@ -1,0 +1,35 @@
+/* QuoteForm-specific overrides — extends InvoiceForm.css */
+
+/* Line items grid with extra VAT column */
+.qf-lines-header--with-vat {
+  grid-template-columns: 1fr 80px 110px 48px 100px 36px !important;
+}
+
+.qf-line--with-vat {
+  grid-template-columns: 1fr 80px 110px 48px 100px 36px !important;
+}
+
+/* VAT checkbox cell */
+.qf-vat-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qf-vat-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-gold, #1B3A6B);
+}
+
+@media (max-width: 768px) {
+  .qf-lines-header--with-vat {
+    display: none !important;
+  }
+
+  .qf-line--with-vat {
+    grid-template-columns: 1fr 60px 80px 30px 80px 30px !important;
+    gap: 4px;
+  }
+}

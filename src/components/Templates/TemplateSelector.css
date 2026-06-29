@@ -1,0 +1,268 @@
+/* src/components/Templates/TemplateSelector.css */
+
+.ts-root {
+  width: 100%;
+}
+
+.ts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ── Individual template card ─────────────────────────────────────────────── */
+.ts-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  overflow: hidden;
+  width: 130px;
+  padding: 0;
+  text-align: left;
+}
+
+.ts-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 4px 16px rgba(27, 58, 107, 0.18);
+  transform: translateY(-2px);
+}
+
+.ts-card--selected {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.15);
+}
+
+.ts-card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  gap: 6px;
+}
+
+.ts-card-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ts-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.ts-badge--free {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.ts-badge--pro {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+/* ── Mini document preview ────────────────────────────────────────────────── */
+.ts-mini {
+  width: 100%;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ts-mini-blank {
+  width: 100%;
+  height: 96px;
+  background: #eee;
+}
+
+.ts-mini-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  flex-shrink: 0;
+  height: 24px;
+}
+
+.ts-mini-logo-box {
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ts-mini-title-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  align-items: flex-end;
+}
+
+.ts-mini-h-line {
+  height: 3px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 2px;
+}
+
+.ts-mini-h-line--wide  { width: 70%; }
+.ts-mini-h-line--narrow { width: 45%; }
+
+.ts-mini-body {
+  flex: 1;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: #fff;
+}
+
+.ts-mini-bill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 3px;
+}
+
+.ts-mini-b-line {
+  height: 3px;
+  border-radius: 2px;
+}
+
+.ts-mini-b-line--name  { width: 50%; opacity: 0.7; }
+.ts-mini-b-line--sub   { width: 35%; background: #ccc; }
+
+.ts-mini-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8e8e8;
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.ts-mini-thead {
+  display: flex;
+  padding: 2px 4px;
+  gap: 3px;
+}
+
+.ts-mini-th {
+  height: 4px;
+  flex: 1;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+}
+
+.ts-mini-tr {
+  display: flex;
+  padding: 2px 4px;
+  gap: 3px;
+}
+
+.ts-mini-td {
+  height: 3px;
+  flex: 1;
+  background: #d0d0d0;
+  border-radius: 1px;
+}
+
+.ts-mini-total-row {
+  margin-top: 2px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ts-mini-total-bar {
+  height: 6px;
+  width: 40%;
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+.ts-mini-footer {
+  height: 6px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ── Upgrade card ─────────────────────────────────────────────────────────── */
+.ts-upgrade-card {
+  border: 2px dashed var(--border-light);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-upgrade-previews {
+  display: flex;
+  gap: 0;
+  padding: 8px 8px 4px;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ts-upgrade-mini {
+  width: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.ts-upgrade-mini .ts-mini {
+  height: 52px;
+}
+
+.ts-upgrade-body {
+  padding: 8px 12px 12px;
+  text-align: center;
+}
+
+.ts-upgrade-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 2px 0;
+}
+
+.ts-upgrade-sub {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin: 0 0 8px 0;
+}
+
+.ts-upgrade-btn {
+  background: var(--color-gold);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.15s;
+}
+
+.ts-upgrade-btn:hover {
+  opacity: 0.88;
+}

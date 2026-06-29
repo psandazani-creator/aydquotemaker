@@ -1,0 +1,74 @@
+/* src/components/Help/HelpPage.css */
+
+.help-page {
+    padding: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.help-page h2 {
+    margin-bottom: 32px;
+    font-size: 28px;
+    color: var(--text-primary);
+}
+
+.help-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.help-section:hover {
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-gold);
+}
+
+.help-section h3 {
+    font-size: 18px;
+    color: var(--color-gold);
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary);
+}
+
+.help-section p {
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.help-section p:first-of-type {
+    margin-top: 0;
+}
+
+.help-section p:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .help-page {
+        padding: 16px;
+    }
+
+    .help-page h2 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .help-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .help-section h3 {
+        font-size: 16px;
+    }
+
+    .help-section p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,137 @@
+/* src/components/Auth/GoldBoxSpinner.css */
+
+.gold-box-spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.gold-box-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.gold-boxes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.gold-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow:
+    0 0 20px rgba(212, 175, 55, 0.4),
+    0 0 40px rgba(212, 175, 55, 0.2),
+    inset 0 1px 2px rgba(212, 175, 55, 0.3);
+  animation: goldBoxPulse 1.2s ease-in-out infinite;
+}
+
+.gold-box.box-1 {
+  background: linear-gradient(135deg, #D4AF37, #C5A028);
+  animation-delay: 0s;
+}
+
+.gold-box.box-2 {
+  background: linear-gradient(135deg, #C5A028, #B8941F);
+  animation-delay: 0.15s;
+}
+
+.gold-box.box-3 {
+  background: linear-gradient(135deg, #B8941F, #A68316);
+  animation-delay: 0.3s;
+}
+
+.gold-box.box-4 {
+  background: linear-gradient(135deg, #A68316, #D4AF37);
+  animation-delay: 0.45s;
+}
+
+@keyframes goldBoxPulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.7;
+    box-shadow:
+      0 0 20px rgba(212, 175, 55, 0.4),
+      0 0 40px rgba(212, 175, 55, 0.2),
+      inset 0 1px 2px rgba(212, 175, 55, 0.3);
+  }
+
+  25% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 1;
+    box-shadow:
+      0 0 30px rgba(212, 175, 55, 0.6),
+      0 0 60px rgba(212, 175, 55, 0.3),
+      inset 0 1px 2px rgba(212, 175, 55, 0.5);
+  }
+
+  50% {
+    transform: scale(0.8) rotate(180deg);
+    opacity: 0.8;
+    box-shadow:
+      0 0 25px rgba(212, 175, 55, 0.5),
+      0 0 50px rgba(212, 175, 55, 0.25),
+      inset 0 1px 2px rgba(212, 175, 55, 0.4);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(270deg);
+    opacity: 0.9;
+    box-shadow:
+      0 0 35px rgba(212, 175, 55, 0.7),
+      0 0 70px rgba(212, 175, 55, 0.35),
+      inset 0 1px 2px rgba(212, 175, 55, 0.6);
+  }
+}
+
+.spinner-text {
+  color: var(--color-gold);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow:
+      0 0 10px rgba(255, 215, 0, 0.5),
+      0 0 20px rgba(255, 215, 0, 0.3);
+  }
+
+  100% {
+    text-shadow:
+      0 0 15px rgba(255, 215, 0, 0.7),
+      0 0 30px rgba(255, 215, 0, 0.4),
+      0 0 45px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@media (max-width: 480px) {
+  .gold-box {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gold-boxes {
+    gap: 8px;
+  }
+
+  .spinner-text {
+    font-size: 14px;
+  }
+}

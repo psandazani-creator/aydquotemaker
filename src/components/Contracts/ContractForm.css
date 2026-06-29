@@ -1,0 +1,321 @@
+/* src/components/Contracts/ContractForm.css */
+
+.contract-form-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-elevated);
+}
+
+.contract-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.contract-form-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 24px;
+}
+
+.contract-header-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.sync-status,
+.online-status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sync-status {
+    background: rgba(158, 158, 158, 0.1);
+    color: var(--text-secondary);
+}
+
+.sync-status.saving {
+    background: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+}
+
+.sync-status.saved {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+.online-status.online {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+.online-status.offline {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+}
+
+/* Tabs */
+.contract-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+    bottom: -2px;
+}
+
+.tab-btn:hover {
+    color: var(--color-gold);
+}
+
+.tab-btn.active {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+}
+
+/* Form Sections */
+.contract-details-section,
+.contract-sign-section {
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.form-group input[readonly] {
+    background: rgba(128, 128, 128, 0.05);
+    cursor: not-allowed;
+}
+
+.contract-textarea {
+    resize: vertical;
+    font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* Two Column Layout */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.party-section {
+    background: var(--bg-elevated);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.party-section h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--color-gold);
+    font-size: 16px;
+}
+
+/* Signature Section */
+.contract-sign-section {
+    padding: 24px 0;
+}
+
+.sign-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.signature-box {
+    background: var(--bg-elevated);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.signature-box h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+.signature-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.canvas-wrapper {
+    margin-bottom: 16px;
+    border: 2px dashed var(--border-light);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+.signature-canvas {
+    display: block;
+    width: 100%;
+    height: 150px;
+    cursor: crosshair;
+    background: white;
+}
+
+.signature-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.signature-actions button {
+    flex: 1;
+}
+
+.signed-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Action Buttons */
+.contract-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 24px;
+    border-top: 2px solid var(--border-light);
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--color-gold);
+    color: var(--bg-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contract-form-container {
+        padding: 16px;
+    }
+
+    .contract-form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .contract-header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .two-column-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sign-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .contract-actions {
+        flex-direction: column;
+    }
+
+    .contract-actions button {
+        width: 100%;
+    }
+
+    .contract-tabs {
+        flex-wrap: wrap;
+    }
+}

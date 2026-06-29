@@ -1,0 +1,254 @@
+/* src/components/Quotations/QuoteManagementModal.css */
+
+.quote-management-modal {
+  max-width: 1200px;
+  width: 95%;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.management-controls {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-elevated);
+}
+
+.management-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.management-tabs .tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.management-tabs .tab:hover {
+  background: var(--bg-elevated);
+  border-color: var(--color-gold);
+}
+
+.management-tabs .tab.active {
+  background: var(--color-gold);
+  color: #ffffff;
+  border-color: var(--color-gold);
+}
+
+.management-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.12);
+}
+
+.sort-select,
+.sort-order-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.sort-order-btn {
+  white-space: nowrap;
+}
+
+.quotes-table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.quotes-management-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.quotes-management-table th,
+.quotes-management-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.quotes-management-table th {
+  background: var(--bg-elevated);
+  font-weight: 600;
+  color: var(--text-primary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.quotes-management-table tbody tr:hover {
+  background: var(--bg-elevated);
+}
+
+.draft-row {
+  background: rgba(255, 193, 7, 0.05);
+}
+
+.final-row {
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.quote-number {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.customer-name {
+  font-weight: 500;
+}
+
+.quote-date {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.quote-total {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-badge.draft {
+  background: rgba(255, 193, 7, 0.2);
+  color: #856404;
+}
+
+.status-badge.final {
+  background: rgba(40, 167, 69, 0.2);
+  color: #155724;
+}
+
+.quote-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.action-btn {
+  padding: 4px 8px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.action-btn:hover {
+  background: var(--bg-elevated);
+}
+
+.view-btn:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.edit-btn:hover {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.delete-btn:hover {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-light);
+}
+
+.summary-info {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .quote-management-modal {
+    width: 98%;
+    max-height: 95vh;
+  }
+
+  .management-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    min-width: unset;
+  }
+
+  .quotes-table-container {
+    max-height: 400px;
+  }
+
+  .quotes-management-table {
+    font-size: 12px;
+  }
+
+  .quotes-management-table th,
+  .quotes-management-table td {
+    padding: 8px 4px;
+  }
+
+  .quote-actions {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .action-btn {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
