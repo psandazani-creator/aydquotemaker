@@ -1,0 +1,53 @@
+import { defineConfig } from 'vite';
+import wasm from 'vite-plugin-wasm';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [wasm()],
+  worker: {
+    format: 'es',
+  },
+  esbuild: {
+    jsx: 'automatic',
+    jsxImportSource: 'react'
+  },
+  server: {
+    port: 5000,
+    host: '0.0.0.0',
+    allowedHosts: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/health': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/admin-zw': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/admin-assets': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  },
+  optimizeDeps: {
+    exclude: ['@journeyapps/wa-sqlite', '@powersync/web'],
+    include: []
+  },
+  define: {
+    'global': 'globalThis',
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  }
+});
