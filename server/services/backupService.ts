@@ -1,6 +1,3 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const archiver = require('archiver');
 import { PassThrough } from 'stream';
 import { query } from '../config/neondb.js';
 
@@ -32,6 +29,7 @@ async function fetchAllData() {
 
 export async function generateBackupZip(): Promise<BackupResult> {
   const { users, licenses, quotes, devices, activityLog } = await fetchAllData();
+  const { default: archiver } = await import('archiver');
 
   const now = new Date();
   const dateStr = now.toISOString().slice(0, 10);
