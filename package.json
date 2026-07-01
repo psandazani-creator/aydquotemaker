@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "QuoteMaker ZW - Admin Dashboard with Activity Tracking & Email Notifications",
   "main": "dist/server/index.js",
-"scripts": {
-  "dev:server": "tsx server/index.ts",
-  "dev:client": "vite",
-  "dev": "npm run dev:server & npm run dev:client",
-  "build:client": "vite build",
-  "build:server": "tsc -p tsconfig.server.json",
-  "build": "npm run build:client && npm run build:server",
-  "start": "NODE_ENV=production node dist/server/index.js",
-  "start:render": "node dist/server/index.js",
-},
+  "scripts": {
+    "dev:server": "tsx server/index.ts",
+    "dev:client": "vite",
+    "dev": "npm run dev:server & npm run dev:client",
+    "build:client": "vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "build": "npm run build:client && npm run build:server",
+    "start": "NODE_ENV=production node dist/server/index.js",
+    "start:render": "node dist/server/index.js"
+  },
   "keywords": [
     "quotemaker",
     "admin",
