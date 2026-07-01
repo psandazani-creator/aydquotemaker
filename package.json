@@ -2,18 +2,18 @@
   "name": "quotemaker-zw-admin",
   "version": "1.0.0",
   "description": "QuoteMaker ZW - Admin Dashboard with Activity Tracking & Email Notifications",
-  "main": "dist/server.js",
-  "scripts": {
-    "dev:server": "tsx server/index.ts",
-    "dev:client": "vite",
-    "dev": "npm run dev:server & npm run dev:client",
-    "build:client": "vite build",
-    "build:server": "tsc -p tsconfig.server.json",
-    "build": "npm run build:client && npm run build:server",
-    "start": "NODE_ENV=production node dist/server/index.js",
-    "deploy:backend": "gcloud run deploy quote-maker-backend --source . --region $CLOUD_RUN_REGION --platform managed --allow-unauthenticated --port 8080 --memory 512Mi --cpu 1 --min-instances 0 --set-env-vars SESSION_SECRET=$SESSION_SECRET,SUPABASE_URL=$SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY,VITE_SUPABASE_URL=$VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY",
-    "migrate:to-neon": "tsx scripts/migrate-to-neon.ts"
-  },
+  "main": "dist/server/index.js",
+"scripts": {
+  "dev:server": "tsx server/index.ts",
+  "dev:client": "vite",
+  "dev": "npm run dev:server & npm run dev:client",
+  "build:client": "vite build",
+  "build:server": "tsc -p tsconfig.server.json",
+  "build": "npm run build:client && npm run build:server",
+  "start": "NODE_ENV=production node dist/server/index.js",
+  "start:render": "node dist/server/index.js",
+  ...
+},
   "keywords": [
     "quotemaker",
     "admin",
